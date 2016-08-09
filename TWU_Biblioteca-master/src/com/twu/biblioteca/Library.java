@@ -38,14 +38,18 @@ public class Library {
 	}
 
 	public String  checkout(int ISBN) {
+		boolean bookAvailable=false;
 	for(Book book:availableBooks){
 
 				if(book.contains(ISBN))
 			{
+				 bookAvailable = true;
 				swapBooks(book);
 			}
 		}
+		if(bookAvailable)
 		return "Thank you! Enjoy the book";
+	return "That book is not available";
 	}
 
 	private void swapBooks(Book book) {
