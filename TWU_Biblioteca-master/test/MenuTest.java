@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class BibliotecaTest {
+public class MenuTest {
 
 	@Test
 	public void shouldPrintWelcomeMessage(){
@@ -27,5 +27,15 @@ public class BibliotecaTest {
 		listOFBooks.add(book3.printBookDetails());
 		assertEquals(listOFBooks, new Library().printBookList());
 
+	}
+	@Test
+	public void shouldDisplaySuccessfulCheckoutOfBook(){
+		Library library=new Library();
+		assertEquals("Thank you! Enjoy the book",library.checkout(2));
+	}
+	@Test
+	public void shouldDisplayUnSuccessfulCheckoutOfBook(){
+		Library library=new Library();
+		assertEquals("That book is not available",library.checkout(5));
 	}
 }

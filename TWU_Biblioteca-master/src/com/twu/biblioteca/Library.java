@@ -8,7 +8,6 @@ public class Library {
 
 	List<Book> checkoutBooks= new ArrayList<Book>();
 	List<Book> availableBooks = new ArrayList<Book>();
-
 	public String getWelcomeMessage(){
 		return "Welcome";
 	}
@@ -40,8 +39,7 @@ public class Library {
 	public String  checkout(int ISBN) {
 		boolean bookAvailable=false;
 	for(Book book:availableBooks){
-
-				if(book.contains(ISBN))
+		if(book.contains(ISBN))
 			{
 				 bookAvailable = true;
 				swapBooks(book);
@@ -55,5 +53,18 @@ public class Library {
 	private void swapBooks(Book book) {
 		availableBooks.remove(book);
 		checkoutBooks.add(book);
+	}
+
+	public void returnBook(int ISBN) {
+		for(Book book:checkoutBooks){
+			if(book.contains(ISBN)) {
+				swapBooksForBooks(book);
+			}
+		}
+	}
+
+	private void swapBooksForBooks(Book book) {
+	checkoutBooks.remove(book);
+		availableBooks.add(book);
 	}
 }

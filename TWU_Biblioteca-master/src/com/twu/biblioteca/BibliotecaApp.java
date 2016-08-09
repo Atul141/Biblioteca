@@ -4,7 +4,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args)
     {
-       Biblioteca biblioteca= new Biblioteca();
-        biblioteca.mainMenu();
+       Menu menu = new Menu();
+        menu.mainMenu();
     }
 }
