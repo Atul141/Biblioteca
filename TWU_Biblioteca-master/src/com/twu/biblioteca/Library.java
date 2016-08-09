@@ -47,13 +47,14 @@ public class Library {
 		return "That book is not available";
 	}
 
-	public void returnBook(int ISBN) {
+	public String  returnBook(int ISBN) {
 		if (checkoutBooks.containsKey(ISBN)) {
 			Book book = checkoutBooks.remove(ISBN);
 			availableBooks.put(ISBN, book);
+
+			return "Thank you for returning the book";
 		}
-
-
+		return "That is not a valid book to return";
 	}
 
 

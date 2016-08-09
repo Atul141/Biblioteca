@@ -1,9 +1,7 @@
 package com.twu.biblioteca;
 
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Scanner;
 
 // Represents the I/O operations
 public class Menu {
@@ -53,7 +51,7 @@ public class Menu {
 	private void returnBook() {
 
 		output.printMessage("Enter the ISBN Number");
-		library.returnBook(input.receiveInput());
+		output.printMessage(library.returnBook(input.receiveInput()));
 	}
 
 	private void checkoutBook() {

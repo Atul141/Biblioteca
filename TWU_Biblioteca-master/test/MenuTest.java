@@ -38,4 +38,16 @@ public class MenuTest {
 		Library library=new Library();
 		assertEquals("That book is not available",library.checkout(5));
 	}
+	@Test
+	public void shouldDisplaySuccessfulReturnOfBook(){
+		Library library=new Library();
+		library.checkout(2);
+		assertEquals("Thank you for returning the book",library.returnBook(2));
+	}
+	@Test
+	public void shouldDisplayUnSuccessfulReturnOfBook(){
+		Library library=new Library();
+		assertEquals("That is not a valid book to return",library.returnBook(2));
+	}
+
 }
