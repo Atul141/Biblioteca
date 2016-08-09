@@ -10,13 +10,13 @@ public class Menu {
 
 	Library library = new Library();
 	Output output = new Output();
+	Input input = new Input();
 
 	public Menu() {
 		output.printMessage(library.getWelcomeMessage());
 	}
 
 	List<String> listOfBooks = new ArrayList<String>();
-	private int option;
 
 	public void printBookList() {
 		output.printMessage(String.format("ISBN Book Name      Author         Year\n"));
@@ -30,12 +30,7 @@ public class Menu {
 
 		while (true) {
 			output.printMessage("1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit");
-			Scanner input = new Scanner(System.in);
-		try {
-			option = input.nextInt();
-		}catch (InputMismatchException e){
-		}
-				applyOptions(option);
+				applyOptions(input.receiveInput());
 		}
 	}
 
@@ -58,30 +53,13 @@ public class Menu {
 	private void returnBook() {
 
 		output.printMessage("Enter the ISBN Number");
-		Scanner input = new Scanner(System.in);
-		int ISBN;
-		try {
-			ISBN=	input.nextInt();
-		}catch (InputMismatchException e){
-			output.printMessage("Invalid ISBN");
-			return;
-		}
-		library.returnBook(ISBN);
+		library.returnBook(input.receiveInput());
 	}
 
 	private void checkoutBook() {
 		printBookList();
 		output.printMessage("Enter the ISBN Number");
-		Scanner input = new Scanner(System.in);
-		int ISBN;
-		try {
-			ISBN=	input.nextInt();
-
-		}catch (InputMismatchException e){
-		output.printMessage("Invalid ISBN");
-			return;
-		}
-			output.printMessage(library.checkout(ISBN));
+			output.printMessage(library.checkout(input.receiveInput()));
 	}
 
 	private void systemExit() {
