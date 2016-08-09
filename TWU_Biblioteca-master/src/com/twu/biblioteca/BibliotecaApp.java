@@ -4,6 +4,7 @@ public class BibliotecaApp {
 
     public static void main(String[] args)
     {
-        new Biblioteca();
+       Biblioteca biblioteca= new Biblioteca();
+        biblioteca.printBookList();
     }
 }
