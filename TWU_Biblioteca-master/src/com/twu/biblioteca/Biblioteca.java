@@ -33,7 +33,7 @@ List<String > listOfBooks=new ArrayList<String>();
 	public void mainMenu(){
 
 		while (true) {
-			System.out.println("1.List Of Books\n2Exit");
+			printMessage("1.List OF Books\n2.CheckoutBooks\n3.Exit");
 			Scanner input = new Scanner(System.in);
 			option = input.nextInt();
 			applyOptions(option);
@@ -43,10 +43,19 @@ List<String > listOfBooks=new ArrayList<String>();
 
 		switch(option){
 			case 1:printBookList();break;
-			case 2:systemExit();
+			case 2:checkoutBook();break;
+				case 3:systemExit();
 				default:invalidInput();
 		}
 	}
+
+	private void checkoutBook() {
+printBookList();
+		Scanner input=new Scanner(System.in);
+		library.checkout(input.nextInt());
+
+	}
+
 
 	private void systemExit() {
 		printMessage("Thanks For Using");
