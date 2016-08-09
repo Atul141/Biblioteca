@@ -19,7 +19,5 @@ public class Book {
 		return String.format("%-5d%-15s%-15s%-5d\n", ISBN, name, author, yearOfPublish);
 	}
 
-	public boolean contains(int ISBN) {
-		return ISBN == this.ISBN;
-	}
+
 }

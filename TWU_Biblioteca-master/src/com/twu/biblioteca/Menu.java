@@ -1,16 +1,17 @@
 package com.twu.biblioteca;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 // Represents the I/O operations
 public class Menu {
 
-	Library library = new Library();
 	Output output = new Output();
 	Input input = new Input();
+	Library library = new Library(input.fetchFromFile());
 
-	public Menu() {
+	public Menu() throws IOException {
 		output.printMessage(library.getWelcomeMessage());
 	}
 
