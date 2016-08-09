@@ -15,9 +15,6 @@ public class Biblioteca {
 	}
 List<String > listOfBooks=new ArrayList<String>();
 	private int option;
-	public void welcomeMessage(){
-		library.getWelcomeMessage();
-	}
 	public void printBookList(){
 		printMessage(String.format("ISBN Book Name      Author         Year\n"));
 		listOfBooks=		library.printBookList();
@@ -52,10 +49,8 @@ List<String > listOfBooks=new ArrayList<String>();
 	private void checkoutBook() {
 printBookList();
 		Scanner input=new Scanner(System.in);
-		library.checkout(input.nextInt());
-
+		printMessage(library.checkout(input.nextInt()));
 	}
-
 
 	private void systemExit() {
 		printMessage("Thanks For Using");

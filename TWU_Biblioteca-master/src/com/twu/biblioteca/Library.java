@@ -37,14 +37,19 @@ public class Library {
 		return bookDetails;
 	}
 
-	public void checkout(int ISBN) {
-		for(Book book:availableBooks){
-			if(book.contains(ISBN))
+	public String  checkout(int ISBN) {
+	for(Book book:availableBooks){
+
+				if(book.contains(ISBN))
 			{
-			availableBooks.remove(book);
-				checkoutBooks.add(book);
+				swapBooks(book);
 			}
 		}
+		return "Thank you! Enjoy the book";
+	}
 
+	private void swapBooks(Book book) {
+		availableBooks.remove(book);
+		checkoutBooks.add(book);
 	}
 }
