@@ -7,14 +7,19 @@ import java.util.Scanner;
 // Represents the I/O operations
 public class Biblioteca {
 
-Library library=new Library();
+	Library library=new Library();
+
+
+	Biblioteca(){
+		printMessage(library.getWelcomeMessage());
+	}
 List<String > listOfBooks=new ArrayList<String>();
 	private int option;
 	public void welcomeMessage(){
 		library.getWelcomeMessage();
 	}
 	public void printBookList(){
-		System.out.format("ISBN Book Name      Author         Year\n");
+		printMessage(String.format("ISBN Book Name      Author         Year\n"));
 		listOfBooks=		library.printBookList();
 	for(String bookDetails:listOfBooks){
 		printMessage(bookDetails);
@@ -39,6 +44,7 @@ List<String > listOfBooks=new ArrayList<String>();
 		switch(option){
 			case 1:printBookList();break;
 			case 2:systemExit();
+				default:invalidInput();
 		}
 	}
 
@@ -47,5 +53,8 @@ List<String > listOfBooks=new ArrayList<String>();
 		System.exit(0);
 
 	}
+	private  void invalidInput() {
+	printMessage("Invalid Input");
 
+	}
 }

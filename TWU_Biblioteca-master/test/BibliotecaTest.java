@@ -1,7 +1,5 @@
-import com.twu.biblioteca.Biblioteca;
 import com.twu.biblioteca.Book;
 import com.twu.biblioteca.Library;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.ArrayList;
