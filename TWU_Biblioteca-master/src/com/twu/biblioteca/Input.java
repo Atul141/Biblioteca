@@ -8,7 +8,9 @@ import java.util.*;
 // Takes Input
 public class Input {
 
-	public int receiveInput() {
+
+
+	int receiveInput() {
 		int option = 0;
 		Scanner input = new Scanner(System.in);
 		try {
@@ -26,7 +28,6 @@ public class Input {
 		while ((book = buffer.readLine()) != null) {
 			listOfBooks.add(book);
 		}
-
 			return (new parseInput().createMapOfBooks(listOfBooks));
 	}
 }

@@ -7,11 +7,12 @@ import java.util.List;
 // Represents the I/O operations
 public class Menu {
 
-	Output output = new Output();
-	Input input = new Input();
-	Library library = new Library(input.fetchFromFile());
+	private Output output = new Output();
+	private Input input=new Input();
+	private Library library;
 
 	public Menu() throws IOException {
+		library = new Library(input.fetchFromFile());
 		output.printMessage(library.getWelcomeMessage());
 	}
 
@@ -29,7 +30,7 @@ public class Menu {
 
 		while (true) {
 			output.printMessage("1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit");
-				applyOptions(input.receiveInput());
+			applyOptions(input.receiveInput());
 		}
 	}
 
@@ -42,23 +43,31 @@ public class Menu {
 			case 2:
 				checkoutBook();
 				break;
-			case 3:returnBook();break;
-			case 4:	systemExit();
+			case 3:
+				returnBook();
+				break;
+			case 4:
+				systemExit();
 
 			default:
 				invalidInput();
 		}
 	}
+
 	private void returnBook() {
 
 		output.printMessage("Enter the ISBN Number");
-		output.printMessage(library.returnBook(input.receiveInput()));
+		if (library.returnBook(input.receiveInput()))
+			output.printMessage("Thank you for returning the book");
+		else output.printMessage("That is not a valid book to return");
 	}
 
 	private void checkoutBook() {
 		printBookList();
 		output.printMessage("Enter the ISBN Number");
-			output.printMessage(library.checkout(input.receiveInput()));
+		if (library.checkout(input.receiveInput()))
+			output.printMessage("Thank you for returning the book");
+		else output.printMessage("That is not a valid book to return");
 	}
 
 	private void systemExit() {
@@ -68,6 +77,5 @@ public class Menu {
 
 	private void invalidInput() {
 		output.printMessage("Invalid Output");
-
 	}
 }
