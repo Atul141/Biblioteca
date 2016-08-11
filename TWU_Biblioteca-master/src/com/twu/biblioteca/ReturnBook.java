@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import IO.Reader;
-import IO.Output;
+import IO.Writer;
 //
 public class ReturnBook implements ListOfMenuItem {
 	private Reader reader;
@@ -12,7 +12,7 @@ public class ReturnBook implements ListOfMenuItem {
 
 	@Override
 	public OperationStatus execute(Library library) throws BookNotFoundExemption {
-		new Output().printMessage("Enter ISBN");
+		new Writer().printMessage("Enter ISBN");
 		int bookID=reader.receiveInput();
 		return execute(library,bookID);
 	}

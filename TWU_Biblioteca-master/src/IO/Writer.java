@@ -2,8 +2,15 @@ package IO;
 
 import com.twu.biblioteca.OperationStatus;
 
-//
-public interface Writer {
-	void printMessage(String bookDetails);
-	void printMessages(OperationStatus output);
+// Displays Writer
+public class Writer {
+
+	 public void printMessage(String bookDetails) {
+		 System.out.println(bookDetails);
+	 }
+		public void printMessages(OperationStatus output) {
+		System.out.println(output);
+
+	}
+
 }

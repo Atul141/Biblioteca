@@ -9,11 +9,6 @@ public class Library {
 	Map<Integer, Book> checkoutBooks = new HashMap<Integer, Book>();
 	private Menu menu;
 
-
-	public OperationStatus getWelcomeMessage() {
-		return OperationStatus.WELCOME;
-	}
-
 	public Library(Menu menu, Map<Integer, Book> availableBooks) {
 		this.menu = menu;
 		this.availableBooks = availableBooks;
@@ -23,7 +18,7 @@ public class Library {
 
 		List<String> bookDetails = new ArrayList<String>();
 		for (Book book : availableBooks.values()) {
-			bookDetails.add(book.getBookDetails());
+			bookDetails.add(book.getDetails());
 		}
 		return bookDetails;
 	}

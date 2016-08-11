@@ -42,5 +42,5 @@ public class MenuTest {
 		Assert.assertNotEquals(menu.performOperation(new Library(new Menu(new Input()),listOfBook),4), OperationStatus.INVALID_OPERATION);
 	}
 
-	
+
 }

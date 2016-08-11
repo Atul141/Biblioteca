@@ -15,11 +15,6 @@ import static org.junit.Assert.assertTrue;
 public class LibraryTest {
 
 	@Test
-	public void shouldPrintWelcomeMessage() throws IOException {
-			Input input=new Input();
-		assertEquals("WELCOME",new Library(new Menu(new Input()),input.fetchFromFile()).getWelcomeMessage());
-	}
-	@Test
 	public void shouldDisplayBookDetails() throws IOException {
 		List<String > listOFBooks= new ArrayList<String>();
 
@@ -27,9 +22,9 @@ public class LibraryTest {
 		Book book2=new Book(2,"Nancy Drew","Carolyn Keene",2008);
 		Book book3=new Book(3,"Artemis Fowl","Eoin Colfer",2005);
 
-		listOFBooks.add(book1.getBookDetails());
-		listOFBooks.add(book2.getBookDetails());
-		listOFBooks.add(book3.getBookDetails());
+		listOFBooks.add(book1.getDetails());
+		listOFBooks.add(book2.getDetails());
+		listOFBooks.add(book3.getDetails());
 		Input input=new Input();
 
 		assertEquals(listOFBooks, new Library(new Menu(new Input()),input.fetchFromFile()).printBookList());
