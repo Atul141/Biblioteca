@@ -5,18 +5,19 @@ import java.util.*;
 // Represents the collections of book
 public class Library {
 
+	private Menu menu;
 	Map<Integer, Book> availableBooks = new HashMap<Integer, Book>();
 	Map<Integer, Book> checkoutBooks = new HashMap<Integer, Book>();
 
-	public Library() {
 
+
+	public OutputString getWelcomeMessage() {
+		return OutputString.WELCOME;
 	}
 
-	public String getWelcomeMessage() {
-		return "Welcome";
-	}
+	public Library(Menu menu,Map<Integer, Book> availableBooks) {
+		this.menu = menu;
 
-	public Library(Map<Integer, Book> availableBooks) {
 		this.availableBooks = availableBooks;
 	}
 

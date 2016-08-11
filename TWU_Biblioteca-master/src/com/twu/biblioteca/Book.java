@@ -4,7 +4,7 @@ package com.twu.biblioteca;
 public class Book {
 
 	private final int ISBN;
-	public final String name;
+	private final String name;
 	private final String author;
 	private final int yearOfPublish;
 

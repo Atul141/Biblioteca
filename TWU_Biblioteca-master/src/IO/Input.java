@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package IO;
+
+import com.twu.biblioteca.Book;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,11 +8,9 @@ import java.io.IOException;
 import java.util.*;
 
 // Takes Input
-public class Input {
+public class Input implements Reader{
 
-
-
-	int receiveInput() {
+	public int receiveInput() {
 		int option = 0;
 		Scanner input = new Scanner(System.in);
 		try {

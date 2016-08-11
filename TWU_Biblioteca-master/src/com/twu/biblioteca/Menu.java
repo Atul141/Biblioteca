@@ -1,24 +1,31 @@
 package com.twu.biblioteca;
+import IO.Input;
+import IO.Output;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 // Represents the I/O operations
-public class Menu {
+
+public class Menu  {
 
 	private Output output = new Output();
 	private Input input=new Input();
 	private Library library;
-
-	public Menu() throws IOException {
-		library = new Library(input.fetchFromFile());
-		output.printMessage(library.getWelcomeMessage());
-	}
-
+	private OutputString outputMessage;
 	List<String> listOfBooks = new ArrayList<String>();
 
-	public void printBookList() {
+	public Menu() throws IOException {
+		library = new Library(this,input.fetchFromFile());
+		output.printMessages(library.getWelcomeMessage());
+	}
+
+
+
+	private void printBookList() {
+
 		output.printMessage(String.format("ISBN Book Name      Author         Year\n"));
 		listOfBooks = library.printBookList();
 		for (String bookDetails : listOfBooks) {
@@ -26,7 +33,7 @@ public class Menu {
 		}
 	}
 
-	public void mainMenu() {
+	void mainMenu() {
 
 		while (true) {
 			output.printMessage("1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit");

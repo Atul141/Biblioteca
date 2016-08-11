@@ -1,6 +1,7 @@
 import com.twu.biblioteca.Book;
-import com.twu.biblioteca.Input;
+import IO.Input;
 import com.twu.biblioteca.Library;
+import com.twu.biblioteca.Menu;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -10,12 +11,12 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class MenuTest {
+public class LibraryTest {
 
 	@Test
-	public void shouldPrintWelcomeMessage(){
-
-		assertEquals("Welcome",new Library().getWelcomeMessage());
+	public void shouldPrintWelcomeMessage() throws IOException {
+			Input input=new Input();
+		assertEquals("Welcome",new Library(new Menu(),input.fetchFromFile()).getWelcomeMessage());
 	}
 	@Test
 	public void shouldDisplayBookDetails() throws IOException {
@@ -30,33 +31,33 @@ public class MenuTest {
 		listOFBooks.add(book3.getBookDetails());
 		Input input=new Input();
 
-		assertEquals(listOFBooks, new Library(input.fetchFromFile()).printBookList());
+		assertEquals(listOFBooks, new Library(new Menu(),input.fetchFromFile()).printBookList());
 
 	}
 	@Test
 	public void shouldDisplaySuccessfulCheckoutOfBook() throws IOException {
 		Input input=new Input();
 		input.fetchFromFile();
-		Library library=new Library(input.fetchFromFile());
+		Library library=new Library(new Menu(),input.fetchFromFile());
 		assertTrue(library.checkout(2));
 	}
 	@Test
 	public void shouldDisplayUnSuccessfulCheckoutOfBook() throws IOException {
 		Input input=new Input();
-		Library library=new Library(input.fetchFromFile());
+		Library library=new Library(new Menu(),input.fetchFromFile());
 		assertEquals(false,library.checkout(5));
 	}
 	@Test
 	public void shouldDisplaySuccessfulReturnOfBook() throws IOException {
 	Input input=new Input();
-			Library library=new Library(input.fetchFromFile());
+			Library library=new Library(new Menu(),input.fetchFromFile());
 		library.checkout(2);
 		assertEquals(true,library.returnBook(2));
 	}
 	@Test
 	public void shouldDisplayUnSuccessfulReturnOfBook() throws IOException {
 		Input input = new Input();
-		Library library=new Library(input.fetchFromFile());
+		Library library=new Library(new Menu(),input.fetchFromFile());
 		assertEquals(false,library.returnBook(2));
 	}
 

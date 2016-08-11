@@ -1,5 +1,7 @@
-package com.twu.biblioteca;
+package IO;
 
+
+import com.twu.biblioteca.Book;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,9 +10,9 @@ import java.util.Map;
 // Parses the input file
 public class parseInput {
 
-	Map<Integer, Book> mapOfBooks = new HashMap<Integer, Book>();
+	Map<Integer,Book> mapOfBooks = new HashMap<Integer, Book>();
 
-	public Map<Integer, Book> createMapOfBooks(List<String> listOfBooks) {
+	Map<Integer,Book> createMapOfBooks(List<String> listOfBooks) {
 		for (String bookString : listOfBooks) {
 			String[] bookDetails = bookString.split(",");
 			int ISBN = Integer.parseInt(bookDetails[0]);
