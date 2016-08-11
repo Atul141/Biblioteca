@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 import IO.Reader;
-
+import IO.Output;
 //
 public class CheckOutBook implements ListOfMenuItem {
 
@@ -11,18 +11,17 @@ private Reader reader;
 		this.reader = reader;
 	}
 	@Override
-	public OutputString execute(Library library) {
+	public OperationStatus execute(Library library) throws BookNotFoundExemption {
+		library.printBookList();
+		new Output().printMessage(" Enter ISBN Number");
 		int bookID=reader.receiveInput();
 		return execute(library,bookID);
 	}
-	public OutputString execute(Library library,int bookID){
-		if(library.checkout(bookID))
-			return OutputString.SUCCESSFUL_CHECKOUT;
-		return OutputString.UNSUCCESSFUL_CHECKOUT;
+	public OperationStatus execute(Library library, int bookID) throws BookNotFoundExemption {
+		if((library.checkout(bookID).getClass())==Book.class)
+			return OperationStatus.SUCCESSFUL_CHECKOUT;
+		return OperationStatus.UNSUCCESSFUL_CHECKOUT;
 	}
 
-	@Override
-	public String getOperations() {
-		return null;
-	}
+
 }

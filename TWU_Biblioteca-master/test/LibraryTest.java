@@ -1,5 +1,6 @@
 import com.twu.biblioteca.Book;
 import IO.Input;
+import com.twu.biblioteca.BookNotFoundExemption;
 import com.twu.biblioteca.Library;
 import com.twu.biblioteca.Menu;
 import org.junit.Test;
@@ -16,7 +17,7 @@ public class LibraryTest {
 	@Test
 	public void shouldPrintWelcomeMessage() throws IOException {
 			Input input=new Input();
-		assertEquals("Welcome",new Library(new Menu(),input.fetchFromFile()).getWelcomeMessage());
+		assertEquals("WELCOME",new Library(new Menu(new Input()),input.fetchFromFile()).getWelcomeMessage());
 	}
 	@Test
 	public void shouldDisplayBookDetails() throws IOException {
@@ -31,34 +32,34 @@ public class LibraryTest {
 		listOFBooks.add(book3.getBookDetails());
 		Input input=new Input();
 
-		assertEquals(listOFBooks, new Library(new Menu(),input.fetchFromFile()).printBookList());
+		assertEquals(listOFBooks, new Library(new Menu(new Input()),input.fetchFromFile()).printBookList());
 
 	}
 	@Test
-	public void shouldDisplaySuccessfulCheckoutOfBook() throws IOException {
+	public void shouldDisplaySuccessfulCheckoutOfBook() throws IOException, BookNotFoundExemption {
 		Input input=new Input();
 		input.fetchFromFile();
-		Library library=new Library(new Menu(),input.fetchFromFile());
-		assertTrue(library.checkout(2));
+		Library library=new Library(new Menu(new Input()),input.fetchFromFile());
+		assertEquals(library.checkout(2).getClass(),Book.class);
 	}
-	@Test
-	public void shouldDisplayUnSuccessfulCheckoutOfBook() throws IOException {
+	@Test(expected = BookNotFoundExemption.class)
+	public void shouldDisplayUnSuccessfulCheckoutOfBook() throws IOException, BookNotFoundExemption {
 		Input input=new Input();
-		Library library=new Library(new Menu(),input.fetchFromFile());
-		assertEquals(false,library.checkout(5));
+		Library library=new Library(new Menu(new Input()),input.fetchFromFile());
+		library.checkout(5);
 	}
 	@Test
-	public void shouldDisplaySuccessfulReturnOfBook() throws IOException {
+	public void shouldDisplaySuccessfulReturnOfBook() throws IOException, BookNotFoundExemption {
 	Input input=new Input();
-			Library library=new Library(new Menu(),input.fetchFromFile());
+			Library library=new Library(new Menu(new Input()),input.fetchFromFile());
 		library.checkout(2);
-		assertEquals(true,library.returnBook(2));
+		assertEquals(library.returnBook(2).getClass(),Book.class);
 	}
-	@Test
-	public void shouldDisplayUnSuccessfulReturnOfBook() throws IOException {
+	@Test(expected = BookNotFoundExemption.class)
+	public void shouldDisplayUnSuccessfulReturnOfBook() throws IOException, BookNotFoundExemption {
 		Input input = new Input();
-		Library library=new Library(new Menu(),input.fetchFromFile());
-		assertEquals(false,library.returnBook(2));
+		Library library=new Library(new Menu(new Input()),input.fetchFromFile());
+		library.returnBook(2);
 	}
 
 }

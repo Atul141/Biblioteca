@@ -5,19 +5,17 @@ import java.util.*;
 // Represents the collections of book
 public class Library {
 
-	private Menu menu;
 	Map<Integer, Book> availableBooks = new HashMap<Integer, Book>();
 	Map<Integer, Book> checkoutBooks = new HashMap<Integer, Book>();
+	private Menu menu;
 
 
-
-	public OutputString getWelcomeMessage() {
-		return OutputString.WELCOME;
+	public OperationStatus getWelcomeMessage() {
+		return OperationStatus.WELCOME;
 	}
 
-	public Library(Menu menu,Map<Integer, Book> availableBooks) {
+	public Library(Menu menu, Map<Integer, Book> availableBooks) {
 		this.menu = menu;
-
 		this.availableBooks = availableBooks;
 	}
 
@@ -30,23 +28,23 @@ public class Library {
 		return bookDetails;
 	}
 
-	public boolean checkout(int ISBN) {
+	public Book checkout(int ISBN) throws BookNotFoundExemption {
 		if (availableBooks.containsKey(ISBN)) {
 			Book book = availableBooks.remove(ISBN);
 			checkoutBooks.put(ISBN, book);
-			return true;
+			return book;
 		}
-		return false;
+		throw new BookNotFoundExemption();
 	}
 
-	public boolean returnBook(int ISBN) {
+	public Book returnBook(int ISBN) throws BookNotFoundExemption {
 		if (checkoutBooks.containsKey(ISBN)) {
 			Book book = checkoutBooks.remove(ISBN);
 			availableBooks.put(ISBN, book);
 
-			return true;
+			return book;
 		}
-		return false;
+		throw new BookNotFoundExemption();
 	}
 
 

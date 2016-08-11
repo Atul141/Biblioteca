@@ -1,5 +1,6 @@
 package com.twu.biblioteca;
 
+import IO.Input;
 import IO.Reader;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,24 +26,24 @@ public class ReturnBookTest {
 	}
 
 	@Test
-	public void shouldBeAbleToReturnCheckedBook() throws IOException {
+	public void shouldBeAbleToReturnCheckedBook() throws IOException, BookNotFoundExemption {
 
 		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyReader dummyReader=new DummyReader();
-		Library library=new Library(new Menu(),listOfBook);
+		Library library=new Library(new Menu(new Input()),listOfBook);
 		new CheckOutBook(dummyReader).execute(library,1);
-		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1),OutputString.SUCCESSFUL_RETURN);
+		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
 @Test
-	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException {
+	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, BookNotFoundExemption {
 
 		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyReader dummyReader=new DummyReader();
-		Library library=new Library(new Menu(),listOfBook);
+		Library library=new Library(new Menu(new Input()),listOfBook);
 		new CheckOutBook(dummyReader).execute(library,1);
-		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2),OutputString.UNSUCCESSFUL_RETURN);
+		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 
 }

@@ -1,88 +1,33 @@
 package com.twu.biblioteca;
-import IO.Input;
-import IO.Output;
 
-import java.io.IOException;
-import java.util.ArrayList;
+import IO.Reader;
+
 import java.util.HashMap;
-import java.util.List;
 
-// Represents the I/O operations
+//
 
-public class Menu  {
+public class Menu {
 
-	private Output output = new Output();
-	private Input input=new Input();
-	private Library library;
-	private OutputString outputMessage;
-	List<String> listOfBooks = new ArrayList<String>();
+	HashMap<Integer, ListOfMenuItem> menuItems = new HashMap<Integer, ListOfMenuItem>();
 
-	public Menu() throws IOException {
-		library = new Library(this,input.fetchFromFile());
-		output.printMessages(library.getWelcomeMessage());
+	public Menu(Reader reader) {
+
+		menuItems.put(1, new ListOfBooks());
+		menuItems.put(2, new CheckOutBook(reader));
+		menuItems.put(3, new ReturnBook(reader));
+		menuItems.put(4, new Exit());
 	}
 
-
-
-	private void printBookList() {
-
-		output.printMessage(String.format("ISBN Book Name      Author         Year\n"));
-		listOfBooks = library.printBookList();
-		for (String bookDetails : listOfBooks) {
-			output.printMessage(bookDetails);
+	public OperationStatus performOperation(Library library, int userChoice) throws BookNotFoundExemption {
+		if (menuItems.containsKey(userChoice)) {
+			ListOfMenuItem listableMenu = menuItems.get(userChoice);
+			return listableMenu.execute(library);
 		}
+		return OperationStatus.INVALID_OPERATION;
 	}
 
-	void mainMenu() {
-
-		while (true) {
-			output.printMessage("1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit");
-			applyOptions(input.receiveInput());
-		}
+	public String getMenu(){
+		return "1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit";
 	}
 
-	private void applyOptions(int option) {
-
-		switch (option) {
-			case 1:
-				printBookList();
-				break;
-			case 2:
-				checkoutBook();
-				break;
-			case 3:
-				returnBook();
-				break;
-			case 4:
-				systemExit();
-
-			default:
-				invalidInput();
-		}
-	}
-
-	private void returnBook() {
-
-		output.printMessage("Enter the ISBN Number");
-		if (library.returnBook(input.receiveInput()))
-			output.printMessage("Thank you for returning the book");
-		else output.printMessage("That is not a valid book to return");
-	}
-
-	private void checkoutBook() {
-		printBookList();
-		output.printMessage("Enter the ISBN Number");
-		if (library.checkout(input.receiveInput()))
-			output.printMessage("Thank you for returning the book");
-		else output.printMessage("That is not a valid book to return");
-	}
-
-	private void systemExit() {
-		output.printMessage("Thanks For Using");
-		System.exit(0);
-	}
-
-	private void invalidInput() {
-		output.printMessage("Invalid Output");
-	}
 }

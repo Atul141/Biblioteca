@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 //
-public enum OutputString {
+public enum OperationStatus {
 
 	WELCOME("Welcome"),INVALID_OPERATION("Select a valid option"),
 	SUCCESSFULLY_RETURNED_LIST_OF_BOOKS(""), QUIT(""),
@@ -12,7 +12,7 @@ public enum OutputString {
 
 	private String message;
 
-	OutputString(String message) {
+	OperationStatus(String message) {
 
 		this.message = message;
 	}

@@ -9,8 +9,10 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.mockito.Mockito.mock;
+
 //
-public class MainMenuTest {
+public class MenuTest {
 
 	class DummyReader implements Reader{
 
@@ -25,20 +27,20 @@ public class MainMenuTest {
 		}
 	}
 	@Test
-	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException {
-		MainMenu menu=new MainMenu(new Input());
+	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException, BookNotFoundExemption {
+		Menu menu=new Menu(new Input());
 		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertEquals(menu.performOperation(new Library(new Menu(),listOfBook),5),OutputString.INVALID_OPERATION);
+		Assert.assertEquals(menu.performOperation(new Library(new Menu(new Input()),listOfBook),5), OperationStatus.INVALID_OPERATION);
 	}
 
 	@Test
-	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException {
-		MainMenu menu=new MainMenu(new Input());
+	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException, BookNotFoundExemption {
+		Menu menu=new Menu(new Input());
 		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertNotEquals(menu.performOperation(new Library(new Menu(),listOfBook),4),OutputString.INVALID_OPERATION);
+		Assert.assertNotEquals(menu.performOperation(new Library(new Menu(new Input()),listOfBook),4), OperationStatus.INVALID_OPERATION);
 	}
 
-
+	
 }

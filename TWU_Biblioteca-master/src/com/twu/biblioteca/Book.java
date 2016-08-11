@@ -16,6 +16,7 @@ public class Book {
 	}
 
 	public String getBookDetails() {
+
 		return String.format("%-5d%-15s%-15s%-5d\n", ISBN, name, author, yearOfPublish);
 	}
 
