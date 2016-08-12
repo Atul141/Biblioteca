@@ -40,4 +40,12 @@ public class checkOutBookTest {
 	DummyConsoleReader dummyReader=new DummyConsoleReader();
 	Assert.assertEquals(new CheckOutItems(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
 }
+	@Test
+	public void shouldBeAbleToCheckoutAvailableMovies() throws IOException, BookNotFoundExemption {
+		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
+		listOfBook.put(1,new Book(1,"Java","Malik",2005));
+		listOfBook.put(2,new Movie(1,"2012","Roland",2010,6));
+		DummyConsoleReader dummyReader=new DummyConsoleReader();
+		Assert.assertEquals(new CheckOutItems(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 2), OperationStatus.SUCCESSFUL_CHECKOUT);
+	}
 }

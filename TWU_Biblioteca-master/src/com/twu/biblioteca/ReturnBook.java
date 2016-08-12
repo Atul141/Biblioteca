@@ -15,7 +15,8 @@ public class ReturnBook implements ListOfMenuItem {
 
 	@Override
 	public OperationStatus execute(LibraryItem library) throws BookNotFoundExemption {
-			new Writer().printMessage("Enter ISBN");
+		Writer writer=new Writer();
+		writer.printMessage("Enter ID");
 		int bookID= consoleReader.receiveInput();
 		return execute(library,bookID);
 	}
