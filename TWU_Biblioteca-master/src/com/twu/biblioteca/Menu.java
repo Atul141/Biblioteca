@@ -12,10 +12,11 @@ public class Menu {
 
 	public Menu(ConsoleReader consoleReader) {
 
-		menuItems.put(1, new ListOfBooks());
-		menuItems.put(2, new CheckOutBook(consoleReader));
-		menuItems.put(3, new ReturnBook(consoleReader));
-		menuItems.put(4, new Exit());
+		menuItems.put(1, new ListOfItems(LibraryItem.Type.BOOK));
+		menuItems.put(2,new ListOfItems(LibraryItem.Type.MOVIE));
+		menuItems.put(3, new CheckOutItems(consoleReader));
+		menuItems.put(4, new ReturnBook(consoleReader));
+		menuItems.put(5, new Exit());
 	}
 
 	public OperationStatus performOperation(LibraryItem library, int userChoice) throws BookNotFoundExemption {
@@ -28,7 +29,7 @@ public class Menu {
 
 	public String getMenu(){
 
-		return "1.List OF Books\n2.CheckoutBooks\n3.Return Book\n4.Exit";
+		return "1.List OF Books\n2.List Of Movie\n3.Checkout\n4.Return\n5.Exit";
 	}
 
 }

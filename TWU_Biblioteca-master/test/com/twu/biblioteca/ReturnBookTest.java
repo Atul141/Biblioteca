@@ -32,7 +32,7 @@ public class ReturnBookTest {
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
 		LibraryItem library=new LibraryItem(listOfBook,new Menu(new Reader()));
-		new CheckOutBook(dummyReader).execute(library,1);
+		new CheckOutItems(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
 @Test(expected =BookNotFoundExemption.class)
@@ -42,7 +42,7 @@ public class ReturnBookTest {
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
 		LibraryItem library=new LibraryItem(listOfBook,new Menu(new Reader()));
-		new CheckOutBook(dummyReader).execute(library,1);
+		new CheckOutItems(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 

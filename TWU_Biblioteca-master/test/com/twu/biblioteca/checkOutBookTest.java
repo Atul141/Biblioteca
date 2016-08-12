@@ -31,13 +31,13 @@ public class checkOutBookTest {
 	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
 	DummyConsoleReader dummyReader=new DummyConsoleReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
+	Assert.assertEquals(new CheckOutItems(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
 }
 @Test(expected = BookNotFoundExemption.class)
 	public void shouldNotBeAbleToCheckoutUnAvailableBooks() throws IOException, BookNotFoundExemption {
 	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
 	DummyConsoleReader dummyReader=new DummyConsoleReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
+	Assert.assertEquals(new CheckOutItems(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
 }
 }

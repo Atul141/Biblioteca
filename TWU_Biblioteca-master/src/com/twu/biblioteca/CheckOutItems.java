@@ -4,17 +4,23 @@ import IO.ConsoleReader;
 import IO.Writer;
 
 // Checks Out a Book
-public class CheckOutBook implements ListOfMenuItem {
+public class CheckOutItems implements ListOfMenuItem {
 
 	private ConsoleReader consoleReader;
-	CheckOutBook(ConsoleReader consoleReader) {
+	CheckOutItems(ConsoleReader consoleReader) {
 
 		this.consoleReader = consoleReader;
 	}
 	@Override
 	public OperationStatus execute(LibraryItem library) throws BookNotFoundExemption {
-		new ListOfBooks().execute(library);
-		new Writer().printMessage(" Enter ISBN Number");
+		Writer writer=new Writer();
+		writer.printMessage("1.Books\n2.Movies");
+		int option=consoleReader.receiveInput();
+		if(option==1)
+		new ListOfItems(LibraryItem.Type.BOOK).execute(library);
+		else
+			new ListOfItems(LibraryItem.Type.MOVIE);
+		writer.printMessage(" Enter ID Number");
 		int bookID = consoleReader.receiveInput();
 		return execute(library, bookID);
 	}

@@ -18,9 +18,7 @@ public class LibraryItem {
 	private Menu menu;
 	Map<Integer,Item> availableItems;
 	Map<Integer,Item> checkedOutItems=new HashMap<Integer, Item>();
-	//Map<Integer,Movie>  availableMovie=new HashMap<Integer, Movie>();
 
-	List<Item> listOfItems=new ArrayList<Item>();
 
 	public LibraryItem(Map<Integer,Item> availableItems, Menu menu) {
 		this.menu = menu;
@@ -34,22 +32,22 @@ public class LibraryItem {
 		Movie movie2=new Movie(2,"White House Down","Roland",2008,7);
 		Movie movie3=new Movie(3,"Black Hawk Down","Rediley",2005,8);
 
-		availableItems.put(1,movie1);
-		availableItems.put(1,movie2);
-		availableItems.put(1,movie3);
+		availableItems.put(11,movie1);
+		availableItems.put(12,movie2);
+		availableItems.put(13,movie3);
 	}
 
 	public List<String> printBookList(Type type) {
 
 		List<String> itemDetails = new ArrayList<String>();
 			for (Item item : availableItems.values()) {
-				if(type==Type.BOOK){
-					if(item.getClass()==Book.class)
-					itemDetails.add(item.getDetails());
+				if (type == Type.BOOK) {
+					if (item.getClass() == Book.class)
+						itemDetails.add(item.getDetails());
 
 				}
-				if(type==Type.MOVIE){
-					if(item.getClass()==Movie.class)
+				if (type == Type.MOVIE) {
+					if (item.getClass() == Movie.class)
 						itemDetails.add(item.getDetails());
 
 				}
