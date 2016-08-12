@@ -8,10 +8,10 @@ import java.util.List;
 public class ListOfBooks implements ListOfMenuItem {
 
 	@Override
-	public OperationStatus execute(Library library) {
+	public OperationStatus execute(LibraryItem library) {
 		 Writer writer =new Writer();
 
-	List<String> listOfBooks=library.printBookList();
+	List<String> listOfBooks=library.printBookList(LibraryItem.Type.BOOK);
 		writer.printMessage("ISBN NAME           AUTHOR         YEAR ");
 		for(String book:listOfBooks){
 			writer.printMessage(book);

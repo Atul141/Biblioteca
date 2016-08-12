@@ -1,26 +1,29 @@
 package com.twu.biblioteca;
 
-import IO.Reader;
+import IO.ConsoleReader;
 import IO.Writer;
+
+import static com.twu.biblioteca.OperationStatus.*;
+
 //
 public class ReturnBook implements ListOfMenuItem {
-	private Reader reader;
+	private ConsoleReader consoleReader;
 
-	public ReturnBook(Reader reader) {
-		this.reader = reader;
+	public ReturnBook(ConsoleReader consoleReader) {
+		this.consoleReader = consoleReader;
 	}
 
 	@Override
-	public OperationStatus execute(Library library) throws BookNotFoundExemption {
+	public OperationStatus execute(LibraryItem library) throws BookNotFoundExemption {
 		new Writer().printMessage("Enter ISBN");
-		int bookID=reader.receiveInput();
+		int bookID= consoleReader.receiveInput();
 		return execute(library,bookID);
 	}
 
-	public OperationStatus execute(Library library, int bookID) throws BookNotFoundExemption {
-		if(library.returnBook(bookID).getClass()==Book.class)
-			return OperationStatus.SUCCESSFUL_RETURN;
-		return OperationStatus.UNSUCCESSFUL_RETURN;
+	public OperationStatus execute(LibraryItem library, int bookID) throws BookNotFoundExemption {
+		if (library.returnBook(bookID).getClass()==Book.class)
+			return SUCCESSFUL_RETURN;
+		return UNSUCCESSFUL_RETURN;
 	}
 
 }

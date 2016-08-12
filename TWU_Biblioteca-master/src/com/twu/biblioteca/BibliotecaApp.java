@@ -1,6 +1,6 @@
 package com.twu.biblioteca;
 
-import IO.Input;
+import IO.Reader;
 import IO.Writer;
 
 import java.io.IOException;
@@ -9,10 +9,10 @@ public class BibliotecaApp {
 
 	public static void main(String[] args) throws IOException, BookNotFoundExemption {
 		printWelcomeMessage();
-		Input input = new Input();
+		Reader reader = new Reader();
 		Writer writer = new Writer();
-		Menu menu = new Menu(input);
-		Library library = new Library(menu, input.fetchFromFile());
+		Menu menu = new Menu(reader);
+		LibraryItem library = new LibraryItem(reader.fetchFromFile(),menu);
 		writer.printMessage(menu.getMenu());
 		OperationStatus operationStatus = menu.performOperation(library, getUserChoice());
 		while (operationStatus != OperationStatus.QUIT) {
@@ -22,7 +22,7 @@ public class BibliotecaApp {
 	}
 
 	public static int getUserChoice() {
-		int temp = new Input().receiveInput();
+		int temp = new Reader().receiveInput();
 		System.out.println();
 		return temp;
 	}

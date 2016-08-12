@@ -19,6 +19,6 @@ public class Movie implements Item{
 
 	@Override
 	public String getDetails() {
-		return String.format("%-5d%-15s%-15s%-7d%-1d\n",id, name,director,year,rating);
+		return String.format("%-5d%-25s%-25s%-7d%-1d\n",id, name,director,year,rating);
 	}
 }

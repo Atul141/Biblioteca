@@ -1,13 +1,13 @@
 package IO;
 
 
-import com.twu.biblioteca.Book;
+import com.twu.biblioteca.Item;
 
 import java.io.IOException;
 import java.util.Map;
 
-public interface Reader {
+public interface ConsoleReader {
 
   int receiveInput();
-	Map<Integer,Book> fetchFromFile() throws IOException;
+	Map<Integer, Item> fetchFromFile() throws IOException;
 }

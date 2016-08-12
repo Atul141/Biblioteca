@@ -1,26 +1,26 @@
 package com.twu.biblioteca;
 
-import IO.Reader;
+import IO.ConsoleReader;
 import IO.Writer;
 
 // Checks Out a Book
 public class CheckOutBook implements ListOfMenuItem {
 
-	private Reader reader;
-	CheckOutBook(Reader reader) {
+	private ConsoleReader consoleReader;
+	CheckOutBook(ConsoleReader consoleReader) {
 
-		this.reader = reader;
+		this.consoleReader = consoleReader;
 	}
 	@Override
-	public OperationStatus execute(Library library) throws BookNotFoundExemption {
+	public OperationStatus execute(LibraryItem library) throws BookNotFoundExemption {
 		new ListOfBooks().execute(library);
 		new Writer().printMessage(" Enter ISBN Number");
-		int bookID = reader.receiveInput();
+		int bookID = consoleReader.receiveInput();
 		return execute(library, bookID);
 	}
 
-	public OperationStatus execute(Library library, int bookID) throws BookNotFoundExemption {
-		if ((library.checkout(bookID).getClass()) == Book.class)
+	public OperationStatus execute(LibraryItem library, int bookID) throws BookNotFoundExemption {
+		if ((library.checkout(bookID).getClass()) == Item.class)
 			return OperationStatus.SUCCESSFUL_CHECKOUT;
 		return OperationStatus.UNSUCCESSFUL_CHECKOUT;
 	}

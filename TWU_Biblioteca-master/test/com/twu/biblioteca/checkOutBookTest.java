@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import IO.Input;
 import IO.Reader;
+import IO.ConsoleReader;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 public class checkOutBookTest {
 
 
-	class DummyReader implements Reader {
+	class DummyConsoleReader implements ConsoleReader {
 
 		@Override
 		public int receiveInput() {
@@ -22,22 +22,22 @@ public class checkOutBookTest {
 		}
 
 		@Override
-		public Map<Integer, Book> fetchFromFile() throws IOException {
+		public Map<Integer, Item> fetchFromFile() throws IOException {
 			return null;
 		}
 	}
 	@Test
 	public void shouldBeAbleToCheckoutAvailableBooks() throws IOException, BookNotFoundExemption {
-	Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
-	DummyReader dummyReader=new DummyReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new Library(new Menu(new Input()), listOfBook), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
+	DummyConsoleReader dummyReader=new DummyConsoleReader();
+	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
 }
-@Test
+@Test(expected = BookNotFoundExemption.class)
 	public void shouldNotBeAbleToCheckoutUnAvailableBooks() throws IOException, BookNotFoundExemption {
-	Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
-	DummyReader dummyReader=new DummyReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new Library(new Menu(new Input()), listOfBook), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
+	DummyConsoleReader dummyReader=new DummyConsoleReader();
+	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new LibraryItem( listOfBook,new Menu(new Reader())), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
 }
 }
