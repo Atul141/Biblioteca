@@ -5,20 +5,20 @@ import IO.Writer;
 import java.util.List;
 
 // Prints The List OF Books
-public class ListOfItems implements ListOfMenuItem {
+public class Items implements MenuItem {
 
-	private LibraryItem.Type type;
+	private Library.Type type;
 
-	ListOfItems(LibraryItem.Type type) {
+	Items(Library.Type type) {
 
 		this.type = type;
 	}
 
 	@Override
-	public OperationStatus execute(LibraryItem library) {
+	public OperationStatus execute(Library library) {
 		Writer writer = new Writer();
 		List<String> listOfBooks = library.printBookList(type);
-		if (type == LibraryItem.Type.BOOK) {
+		if (type == Library.Type.BOOK) {
 
 			writer.printMessage("ISBN NAME           AUTHOR         YEAR ");
 			for (String book : listOfBooks) {
@@ -31,6 +31,6 @@ public class ListOfItems implements ListOfMenuItem {
 				writer.printMessage(movie);
 			}
 		}
-			return OperationStatus.SUCCESSFULLY_RETURNED;
+		return OperationStatus.SUCCESSFULLY_RETURNED;
 	}
 }

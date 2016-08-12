@@ -8,24 +8,28 @@ import java.util.HashMap;
 
 public class Menu {
 
-	HashMap<Integer, ListOfMenuItem> menuItems = new HashMap<Integer, ListOfMenuItem>();
+	private final ConsoleReader consoleReader;
 
 	public Menu(ConsoleReader consoleReader) {
 
-		menuItems.put(1, new ListOfItems(LibraryItem.Type.BOOK));
-		menuItems.put(2,new ListOfItems(LibraryItem.Type.MOVIE));
-		menuItems.put(3, new CheckOutItems(consoleReader));
-		menuItems.put(4, new ReturnBook(consoleReader));
-		menuItems.put(5, new Exit());
+
+		this.consoleReader = consoleReader;
 	}
 
-	public OperationStatus performOperation(LibraryItem library, int userChoice) throws BookNotFoundExemption {
+	public OperationStatus preLoginMenu(Library library, int userChoice) throws ItemNotFound {
+		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
+		menuItems.put(1, new Items(Library.Type.BOOK));
+		menuItems.put(2,new Items(Library.Type.MOVIE));
+		menuItems.put(4, new UserLogin());
+		menuItems.put(3, new ReturnBook(consoleReader));
+		menuItems.put(5, new Exit());
 		if (menuItems.containsKey(userChoice)) {
-			ListOfMenuItem listableMenu = menuItems.get(userChoice);
+			MenuItem listableMenu = menuItems.get(userChoice);
 			return listableMenu.execute(library);
 		}
 		return OperationStatus.INVALID_OPERATION;
 	}
+
 
 	public String getMenu(){
 

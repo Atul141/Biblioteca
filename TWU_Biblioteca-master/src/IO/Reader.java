@@ -31,4 +31,9 @@ public class Reader implements ConsoleReader {
 		}
 		return (new parseInput().createMapOfBooks(listOfItems));
 	}
+
+	public String receiveString() {
+	Scanner input=new Scanner(System.in);
+		return input.next();
+	}
 }

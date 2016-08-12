@@ -28,19 +28,19 @@ public class MenuTest {
 		}
 	}
 	@Test
-	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException, BookNotFoundExemption {
+	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException, ItemNotFound {
 		Menu menu=new Menu(new Reader());
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertEquals(menu.performOperation(new LibraryItem(listOfBook,new Menu(new Reader())),5), OperationStatus.INVALID_OPERATION);
+		Assert.assertEquals(menu.preLoginMenu(new Library(listOfBook,new Menu(new Reader())),5), OperationStatus.INVALID_OPERATION);
 	}
 
 	@Test
-	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException, BookNotFoundExemption {
+	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException, ItemNotFound {
 		Menu menu=new Menu(new Reader());
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertNotEquals(menu.performOperation(new LibraryItem(listOfBook,new Menu(new Reader())),4), OperationStatus.INVALID_OPERATION);
+		Assert.assertNotEquals(menu.preLoginMenu(new Library(listOfBook,new Menu(new Reader())),4), OperationStatus.INVALID_OPERATION);
 	}
 
 

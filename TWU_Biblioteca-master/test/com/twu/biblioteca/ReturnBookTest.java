@@ -26,23 +26,23 @@ public class ReturnBookTest {
 	}
 
 	@Test
-	public void shouldBeAbleToReturnCheckedBook() throws IOException, BookNotFoundExemption {
+	public void shouldBeAbleToReturnCheckedBook() throws IOException, ItemNotFound {
 
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
-		LibraryItem library=new LibraryItem(listOfBook,new Menu(new Reader()));
-		new CheckOutItems(dummyReader).execute(library,1);
+		Library library=new Library(listOfBook,new Menu(new Reader()));
+		new CheckOutItems(dummyReader).execute(library,1, Library.Type.BOOK);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
-@Test(expected =BookNotFoundExemption.class)
-	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, BookNotFoundExemption {
+@Test(expected =ItemNotFound.class)
+	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, ItemNotFound {
 
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
-		LibraryItem library=new LibraryItem(listOfBook,new Menu(new Reader()));
-		new CheckOutItems(dummyReader).execute(library,1);
+		Library library=new Library(listOfBook,new Menu(new Reader()));
+		new CheckOutItems(dummyReader).execute(library,1, Library.Type.BOOK);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 

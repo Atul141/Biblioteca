@@ -1,15 +1,16 @@
 package com.twu.biblioteca;
 
 import IO.Reader;
-import org.junit.Assert;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 //
-public class LibraryItemTest {
+public class LibraryTest {
 @Test
 	public void shouldBeAbleToVerifyIfItemDetailsArePrintedForBooks() throws IOException {
 	List<String > listOFBooks= new ArrayList<String>();
@@ -22,7 +23,7 @@ public class LibraryItemTest {
 	listOFBooks.add(book2.getDetails());
 	listOFBooks.add(book3.getDetails());
 	Reader reader =new Reader();
-	Assert.assertEquals(listOFBooks, new LibraryItem(reader.fetchFromFile(),new Menu(new Reader())).printBookList(LibraryItem.Type.BOOK));
+	assertEquals(listOFBooks, new Library(reader.fetchFromFile(),new Menu(new Reader())).printBookList(Library.Type.BOOK));
 }
 @Test
 	public void shouldBeAbleToVerifyIfItemDetailsArePrintedForMovie() throws IOException {
@@ -35,7 +36,7 @@ public class LibraryItemTest {
 	listOFBooks.add(movie1.getDetails());
 	listOFBooks.add(movie2.getDetails());
 	listOFBooks.add(movie3.getDetails());
-	Assert.assertEquals(listOFBooks, new LibraryItem(new Menu(new Reader())).printBookList(LibraryItem.Type.MOVIE));
+	assertEquals(listOFBooks, new Library(new Menu(new Reader())).printBookList(Library.Type.MOVIE));
 }
 
 }

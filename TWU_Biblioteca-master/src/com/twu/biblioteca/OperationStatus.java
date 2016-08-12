@@ -8,6 +8,7 @@ public enum OperationStatus {
 	SUCCESSFUL_CHECKOUT("Thank you! Enjoy the book"),
 	UNSUCCESSFUL_CHECKOUT("This book is not available"),
 	UNSUCCESSFUL_RETURN("That is not a valid book to return."),
+	SUCCESSFUL_LOGIN(""),
 	SUCCESSFUL_RETURN("Thank you for returning the book");
 
 	private String message;

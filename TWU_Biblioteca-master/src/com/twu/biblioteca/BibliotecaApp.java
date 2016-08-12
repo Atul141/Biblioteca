@@ -7,17 +7,17 @@ import java.io.IOException;
 
 public class BibliotecaApp {
 
-	public static void main(String[] args) throws IOException, BookNotFoundExemption {
+	public static void main(String[] args) throws IOException, ItemNotFound {
 		printWelcomeMessage();
 		Reader reader = new Reader();
 		Writer writer = new Writer();
 		Menu menu = new Menu(reader);
-		LibraryItem library = new LibraryItem(reader.fetchFromFile(),menu);
+		Library library = new Library(reader.fetchFromFile(),menu);
 		writer.printMessage(menu.getMenu());
-		OperationStatus operationStatus = menu.performOperation(library, getUserChoice());
+		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
 		while (operationStatus != OperationStatus.QUIT) {
 			writer.printMessage(menu.getMenu());
-			operationStatus = menu.performOperation(library, getUserChoice());
+			operationStatus = menu.preLoginMenu(library, getUserChoice());
 		}
 	}
 
