@@ -9,13 +9,18 @@ public class UserLogin implements MenuItem {
 	private static String PASSWORD="Hello";
 	private Writer writer=new Writer();
 	private Reader reader=new Reader();
+	private Library library;
 
+	public UserLogin(Library library){
 
-	private void authenticatePassword() {
+		this.library = library;
+	}
+
+	private void authenticatePassword() throws ItemNotFound {
 		writer.printMessage("Enter your Password");
 		String password = reader.receiveString();
-		if(password==PASSWORD){
-		new subMenu();
+		if(password.equals(PASSWORD)){
+		new Menu(new Reader(),library).postLoginMenu(library);
 		}
 		else{
 			writer.printMessage("Wrong password");

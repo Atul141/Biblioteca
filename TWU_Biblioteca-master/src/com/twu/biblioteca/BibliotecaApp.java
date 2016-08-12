@@ -11,8 +11,9 @@ public class BibliotecaApp {
 		printWelcomeMessage();
 		Reader reader = new Reader();
 		Writer writer = new Writer();
-		Menu menu = new Menu(reader);
-		Library library = new Library(reader.fetchFromFile(),menu);
+		Library library = new Library(reader.fetchFromFile());
+		Menu menu = new Menu(reader,library);
+
 		writer.printMessage(menu.getMenu());
 		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
 		while (operationStatus != OperationStatus.QUIT) {

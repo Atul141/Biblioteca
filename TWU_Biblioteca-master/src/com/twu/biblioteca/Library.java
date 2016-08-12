@@ -7,21 +7,15 @@ import java.util.Map;
 
 //
 public class Library {
-	public Library(Menu menu) {
-	}
 
 	public enum Type {
 		BOOK, MOVIE;
 	}
-
-	private Type type;
-	private Menu menu;
 	Map<Integer,Item> availableItems;
 	Map<Integer,Item> checkedOutItems=new HashMap<Integer, Item>();
 
 
-	public Library(Map<Integer,Item> availableItems, Menu menu) {
-		this.menu = menu;
+	public Library(Map<Integer,Item> availableItems) {
 		this.availableItems = availableItems;
 		addMovies();
 	}

@@ -31,8 +31,8 @@ public class ReturnBookTest {
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
-		Library library=new Library(listOfBook,new Menu(new Reader()));
-		new CheckOutItems(dummyReader).execute(library,1, Library.Type.BOOK);
+		Library library=new Library(listOfBook);
+		new CheckOutBooks(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
 @Test(expected =ItemNotFound.class)
@@ -41,8 +41,8 @@ public class ReturnBookTest {
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
-		Library library=new Library(listOfBook,new Menu(new Reader()));
-		new CheckOutItems(dummyReader).execute(library,1, Library.Type.BOOK);
+		Library library=new Library(listOfBook);
+		new CheckOutBooks(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 
