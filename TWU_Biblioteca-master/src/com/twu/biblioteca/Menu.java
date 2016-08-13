@@ -10,9 +10,9 @@ import java.util.HashMap;
 
 public class Menu {
 
-	private  ConsoleReader consoleReader;
+	private ConsoleReader consoleReader;
 
-	public Menu(ConsoleReader consoleReader,Library library) {
+	public Menu(ConsoleReader consoleReader, Library library) {
 
 
 		this.consoleReader = consoleReader;
@@ -21,7 +21,7 @@ public class Menu {
 	public OperationStatus preLoginMenu(Library library, int userChoice) throws ItemNotFound {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1, new Items(Library.Type.BOOK));
-		menuItems.put(2,new Items(Library.Type.MOVIE));
+		menuItems.put(2, new Items(Library.Type.MOVIE));
 		menuItems.put(4, new UserLogin(library));
 		menuItems.put(3, new ReturnBook(consoleReader));
 		menuItems.put(5, new Exit());
@@ -33,12 +33,15 @@ public class Menu {
 	}
 
 	public OperationStatus postLoginMenu(Library library) throws ItemNotFound {
-		displayPostMenu();
+		new Writer().printMessage(getPostLoginMenu());
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
-		menuItems.put(1,new CheckOutBooks(consoleReader));
-		menuItems.put(2, new CheckOutMovies(consoleReader));
-		menuItems.put(3,new Exit());
-	int userChoice=	getUserChoiceForPostLoginMenu();
+		menuItems.put(1, new Items(Library.Type.BOOK));
+		menuItems.put(2, new Items(Library.Type.MOVIE));
+		menuItems.put(3, new CheckOutBooks(consoleReader));
+		menuItems.put(4, new CheckOutMovies(consoleReader));
+		menuItems.put(5, new ReturnBook(consoleReader));
+		menuItems.put(6, new Exit());
+		int userChoice = getUserChoiceForPostLoginMenu();
 		if (menuItems.containsKey(userChoice)) {
 			MenuItem listableMenu = menuItems.get(userChoice);
 			return listableMenu.execute(library);
@@ -46,16 +49,17 @@ public class Menu {
 		return OperationStatus.INVALID_OPERATION;
 	}
 
-	private void displayPostMenu() {
-	new Writer().printMessage("1.Books\n2.Movie\n3.Exit");
-	}
 
-	public String getMenu(){
+	public String getMenu() {
 
 		return "1.List OF Books\n2.List Of Movie\n3.Return\n4.Login\n5.Exit";
 	}
 
 	public int getUserChoiceForPostLoginMenu() {
 		return consoleReader.receiveInput();
+	}
+
+	public String getPostLoginMenu() {
+		return "1.List OF Books\n2.List Of Movie\n3.Checkout Book\n4.Checkout Movie\n5.Return Item\n6.Exit";
 	}
 }

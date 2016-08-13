@@ -11,7 +11,7 @@ public enum OperationStatus {
 	SUCCESSFUL_LOGIN(""),
 	SUCCESSFUL_RETURN("Thank you for returning the book");
 
-	private String message;
+	public String message;
 
 	OperationStatus(String message) {
 

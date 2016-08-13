@@ -15,16 +15,13 @@ public class CheckOutBooks implements MenuItem {
 
 	@Override
 	public OperationStatus execute(Library library) throws ItemNotFound {
-		new Writer().printMessage(" Enter ID Number");
+			new Writer().printMessage(" Enter ID Number");
 		int bookID = consoleReader.receiveInput();
-		return execute(library, bookID);
+			return execute(library, bookID);
 	}
-
 	public OperationStatus execute(Library library, int ID) throws ItemNotFound {
 		if ((library.checkout(ID).getClass()) == Book.class)
 			return OperationStatus.SUCCESSFUL_CHECKOUT;
 		return OperationStatus.UNSUCCESSFUL_CHECKOUT;
-
-
 	}
 }

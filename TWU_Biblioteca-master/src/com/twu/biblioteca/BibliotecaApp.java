@@ -12,13 +12,26 @@ public class BibliotecaApp {
 		Reader reader = new Reader();
 		Writer writer = new Writer();
 		Library library = new Library(reader.fetchFromFile());
-		Menu menu = new Menu(reader,library);
-
+		Menu menu = new Menu(reader, library);
 		writer.printMessage(menu.getMenu());
 		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
-		while (operationStatus != OperationStatus.QUIT) {
-			writer.printMessage(menu.getMenu());
-			operationStatus = menu.preLoginMenu(library, getUserChoice());
+		while (operationStatus != OperationStatus.QUIT && operationStatus != OperationStatus.SUCCESSFUL_LOGIN) {
+			try {
+				writer.printMessage(menu.getMenu());
+				operationStatus = menu.preLoginMenu(library, getUserChoice());
+			} catch (ItemNotFound e) {
+				writer.printMessage("Item Not Found");
+			}
+		}
+		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
+			while (operationStatus != OperationStatus.QUIT) {
+				try {
+					//writer.printMessage(menu.getPostLoginMenu());
+					operationStatus = menu.postLoginMenu(library);
+				} catch (ItemNotFound e) {
+					writer.printMessage("Item not Found");
+				}
+			}
 		}
 	}
 
