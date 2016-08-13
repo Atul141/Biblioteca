@@ -22,7 +22,7 @@ public class Menu {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1, new Items(Library.Type.BOOK));
 		menuItems.put(2, new Items(Library.Type.MOVIE));
-		menuItems.put(4, new UserLogin(library));
+		menuItems.put(4, new UserLogin(library,this));
 		menuItems.put(3, new ReturnBook(consoleReader));
 		menuItems.put(5, new Exit());
 		if (menuItems.containsKey(userChoice)) {
@@ -33,14 +33,14 @@ public class Menu {
 	}
 
 	public OperationStatus postLoginMenu(Library library) throws ItemNotFound {
-		new Writer().printMessage(getPostLoginMenu());
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1, new Items(Library.Type.BOOK));
 		menuItems.put(2, new Items(Library.Type.MOVIE));
 		menuItems.put(3, new CheckOutBooks(consoleReader));
 		menuItems.put(4, new CheckOutMovies(consoleReader));
 		menuItems.put(5, new ReturnBook(consoleReader));
-		menuItems.put(6, new Exit());
+		menuItems.put(6, new userLogout(consoleReader,this));
+		menuItems.put(7, new Exit());
 		int userChoice = getUserChoiceForPostLoginMenu();
 		if (menuItems.containsKey(userChoice)) {
 			MenuItem listableMenu = menuItems.get(userChoice);
@@ -60,6 +60,6 @@ public class Menu {
 	}
 
 	public String getPostLoginMenu() {
-		return "1.List OF Books\n2.List Of Movie\n3.Checkout Book\n4.Checkout Movie\n5.Return Item\n6.Exit";
+		return "1.List OF Books\n2.List Of Movie\n3.Checkout Book\n4.Checkout Movie\n5.Return Item\n6.Logout\n7.Exit";
 	}
 }

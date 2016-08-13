@@ -10,17 +10,19 @@ public class UserLogin implements MenuItem {
 	private Writer writer=new Writer();
 	private Reader reader=new Reader();
 	private Library library;
+	private Menu menu;
 
-	public UserLogin(Library library){
+	public UserLogin(Library library,Menu menu){
 
 		this.library = library;
+		this.menu = menu;
 	}
 
 	private void authenticatePassword() throws ItemNotFound {
 		writer.printMessage("Enter your Password");
 		String password = reader.receiveString();
 		if(password.equals(PASSWORD)){
-		new Menu(new Reader(),library).postLoginMenu(library);
+			 BibliotecaApp.postLoginOperations(writer,library,menu);
 		}
 		else{
 			writer.printMessage("Wrong password");

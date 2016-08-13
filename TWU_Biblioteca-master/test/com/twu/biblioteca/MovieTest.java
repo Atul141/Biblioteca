@@ -16,7 +16,7 @@ public class MovieTest {
 	@Test
 	public void shouldBeAbleToVerifyIfMovieDetailsAreDisplayed() {
 		Movie movie = new Movie(1, "2012", "Roland", 2012, 6);
-		assertEquals("1    2012           Roland         2012   6\n", movie.getDetails());
+		assertEquals("1    2012                     Roland                   2012   6\n", movie.getDetails());
 
 	}
 }

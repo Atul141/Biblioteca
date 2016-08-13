@@ -15,6 +15,28 @@ public class BibliotecaApp {
 		Menu menu = new Menu(reader, library);
 		writer.printMessage(menu.getMenu());
 		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
+		operationStatus = preLoginOperations(writer, library, menu);
+		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
+			postLoginOperations(writer, library, menu);
+
+		}
+	}
+	public static void postLoginOperations(Writer writer, Library library, Menu menu) throws ItemNotFound {
+		writer.printMessage(menu.getPostLoginMenu());
+		OperationStatus operationStatus=menu.postLoginMenu(library);
+		while (operationStatus != OperationStatus.QUIT) {
+			try {
+				writer.printMessage(menu.getPostLoginMenu());
+				operationStatus = menu.postLoginMenu(library);
+			} catch (ItemNotFound e) {
+				writer.printMessage("Item not Found");
+			}
+		}
+	}
+
+	public static OperationStatus preLoginOperations(Writer writer, Library library, Menu menu) throws ItemNotFound {
+		writer.printMessage(menu.getMenu());
+	OperationStatus	operationStatus = menu.preLoginMenu(library, getUserChoice());
 		while (operationStatus != OperationStatus.QUIT && operationStatus != OperationStatus.SUCCESSFUL_LOGIN) {
 			try {
 				writer.printMessage(menu.getMenu());
@@ -23,16 +45,7 @@ public class BibliotecaApp {
 				writer.printMessage("Item Not Found");
 			}
 		}
-		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
-			while (operationStatus != OperationStatus.QUIT) {
-				try {
-					//writer.printMessage(menu.getPostLoginMenu());
-					operationStatus = menu.postLoginMenu(library);
-				} catch (ItemNotFound e) {
-					writer.printMessage("Item not Found");
-				}
-			}
-		}
+		return operationStatus;
 	}
 
 	public static int getUserChoice() {
