@@ -1,8 +1,6 @@
 package com.twu.biblioteca;
 
 import IO.ConsoleReader;
-import IO.Reader;
-import IO.Writer;
 
 import java.util.HashMap;
 
@@ -20,8 +18,8 @@ public class Menu {
 
 	public OperationStatus preLoginMenu(Library library, int userChoice) throws ItemNotFound {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
-		menuItems.put(1, new Items(Library.Type.BOOK));
-		menuItems.put(2, new Items(Library.Type.MOVIE));
+		menuItems.put(1, new DisplayItems(Library.Type.BOOK));
+		menuItems.put(2, new DisplayItems(Library.Type.MOVIE));
 		menuItems.put(4, new UserLogin(library,this));
 		menuItems.put(3, new ReturnBook(consoleReader));
 		menuItems.put(5, new Exit());
@@ -34,8 +32,8 @@ public class Menu {
 
 	public OperationStatus postLoginMenu(Library library,User user) throws ItemNotFound {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
-		menuItems.put(1, new Items(Library.Type.BOOK));
-		menuItems.put(2, new Items(Library.Type.MOVIE));
+		menuItems.put(1, new DisplayItems(Library.Type.BOOK));
+		menuItems.put(2, new DisplayItems(Library.Type.MOVIE));
 		menuItems.put(3, new DisplayCustomerInfo(user));
 		menuItems.put(4, new CheckOutBooks(consoleReader,user));
 		menuItems.put(5, new CheckOutMovies(consoleReader));
@@ -50,7 +48,7 @@ public class Menu {
 		return OperationStatus.INVALID_OPERATION;
 	}
 
-	public OperationStatus adminMenu(Library library,User user) throws ItemNotFound {
+	public OperationStatus adminMenu(Library library,Admin user) throws ItemNotFound {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1,new TrackCheckOutBooks());
 		menuItems.put(2,new Exit());
@@ -68,6 +66,7 @@ public class Menu {
 	}
 
 	public int getUserChoiceForPostLoginMenu() {
+
 		return consoleReader.receiveInput();
 	}
 

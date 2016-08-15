@@ -1,17 +1,21 @@
 package com.twu.biblioteca;
 
+import IO.DBParser;
 import IO.Reader;
 import IO.Writer;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class BibliotecaApp {
 
-	public static void main(String[] args) throws IOException, ItemNotFound {
+	public static void main(String[] args) throws IOException, ItemNotFound, SQLException {
 		printWelcomeMessage();
 		Reader reader = new Reader();
 		Writer writer = new Writer();
-		Library library = new Library(reader.fetchFromFile());
+		DBParser dbParser=new DBParser();
+		dbParser.connectToDB();
+		Library library = new Library(dbParser.getItemsFromDb());
 		Menu menu = new Menu(reader, library);
 		preLoginOperations(writer,library,menu);
 	}
@@ -41,7 +45,7 @@ public class BibliotecaApp {
 		}
 		return operationStatus;
 	}
-	public static OperationStatus adminLoginOperations(Writer writer, Library library, Menu menu,User user) throws ItemNotFound {
+	public static OperationStatus adminLoginOperations(Writer writer, Library library, Menu menu,Admin user) throws ItemNotFound {
 		writer.printMessage(menu.getAdminMenu());
 		OperationStatus	operationStatus = menu.adminMenu(library,user);
 		while (operationStatus != OperationStatus.QUIT && operationStatus != OperationStatus.SUCCESSFUL_LOGIN) {

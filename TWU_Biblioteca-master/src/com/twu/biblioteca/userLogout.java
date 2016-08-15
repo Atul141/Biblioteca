@@ -16,6 +16,6 @@ public class userLogout implements MenuItem {
 	@Override
 	public OperationStatus execute(Library library) throws ItemNotFound {
 		BibliotecaApp.preLoginOperations(new Writer(),library,menu);
-		return null;
+		return OperationStatus.SUCCESSFUL_LOGOUT;
 	}
 }

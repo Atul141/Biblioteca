@@ -9,6 +9,7 @@ public enum OperationStatus {
 	UNSUCCESSFUL_CHECKOUT("This book is not available"),
 	UNSUCCESSFUL_RETURN("That is not a valid book to return."),
 	SUCCESSFUL_LOGIN(""),
+	SUCCESSFUL_LOGOUT(""),
 	SUCCESSFUL_DISPLAY(""),
 	SUCCESSFUL_RETURN("Thank you for returning the book");
 
