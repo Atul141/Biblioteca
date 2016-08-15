@@ -20,5 +20,8 @@ public class Book implements Item{
 		return String.format("%-5d%-15s%-15s%-5d\n", ISBN, name, author, yearOfPublish);
 	}
 
-
+	@Override
+	public String toString() {
+		return name;
+	}
 }

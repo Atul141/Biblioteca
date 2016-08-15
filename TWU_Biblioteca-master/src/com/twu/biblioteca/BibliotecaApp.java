@@ -47,7 +47,19 @@ public class BibliotecaApp {
 		}
 		return operationStatus;
 	}
-
+	public static OperationStatus adminLoginOperations(Writer writer, Library library, Menu menu,User user) throws ItemNotFound {
+		writer.printMessage(menu.getAdminMenu());
+		OperationStatus	operationStatus = menu.adminMenu(library,user);
+		while (operationStatus != OperationStatus.QUIT && operationStatus != OperationStatus.SUCCESSFUL_LOGIN) {
+			try {
+				writer.printMessage(menu.getAdminMenu());
+				operationStatus = menu.adminMenu(library,user);
+			} catch (ItemNotFound e) {
+				writer.printMessage("Item Not Found");
+			}
+		}
+		return operationStatus;
+	}
 	public static int getUserChoice() {
 		int temp = new Reader().receiveInput();
 		System.out.println();

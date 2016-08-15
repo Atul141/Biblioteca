@@ -1,6 +1,7 @@
 package com.twu.biblioteca;
 
 import IO.ConsoleReader;
+import IO.Writer;
 
 //
 public class CheckOutMovies implements MenuItem {
@@ -12,6 +13,7 @@ public class CheckOutMovies implements MenuItem {
 
 	@Override
 	public OperationStatus execute(Library library) throws ItemNotFound {
+		new Writer().printMessage(" Enter ID Number");
 		int bookID = consoleReader.receiveInput();
 		return execute(library, bookID);
 	}

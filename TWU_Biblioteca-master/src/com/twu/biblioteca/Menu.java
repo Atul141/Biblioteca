@@ -49,6 +49,17 @@ public class Menu {
 		return OperationStatus.INVALID_OPERATION;
 	}
 
+	public OperationStatus adminMenu(Library library,User user) throws ItemNotFound {
+		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
+		menuItems.put(1,new TrackCheckOutBooks());
+		menuItems.put(2,new Exit());
+		int userChoice = getUserChoiceForPostLoginMenu();
+		if (menuItems.containsKey(userChoice)) {
+			MenuItem listableMenu = menuItems.get(userChoice);
+			return listableMenu.execute(library);
+		}
+		return OperationStatus.INVALID_OPERATION;
+	}
 
 	public String getMenu() {
 
@@ -61,5 +72,9 @@ public class Menu {
 
 	public String getPostLoginMenu() {
 		return "1.List OF Books\n2.List Of Movie\n3.Checkout Book\n4.Checkout Movie\n5.Return Item\n6.Logout\n7.Exit";
+	}
+
+	public String getAdminMenu() {
+		return "1.track Books\n2.Exit";
 	}
 }

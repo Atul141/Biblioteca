@@ -3,12 +3,18 @@ package com.twu.biblioteca;
 import javax.jws.soap.SOAPBinding;
 
 // Represents the Library Admin
-public class Admin extends User {
+public class Admin implements Accounts {
+
+	private String userId;
+	private String password;
 
 	public Admin(String userId, String password){
-		super(userId,password);
+		this.userId = userId;
+		this.password = password;
 	}
 	public boolean authenticate(String userId,String password){
-		return super.authenticate(userId,password);
+		System.out.println(userId+password);
+		return new User(this.userId,this.password).authenticate(userId,password);
 	}
+
 }

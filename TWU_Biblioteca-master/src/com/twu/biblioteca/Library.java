@@ -73,4 +73,7 @@ public class Library {
 		throw new ItemNotFound();
 	}
 
+	public Map<Book,User> getCheckedOutbooks(){
+		return checkedOutbooks;
+	}
 }

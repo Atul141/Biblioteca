@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
 // Represents a user
-public class User {
+public class User implements Accounts{
 
 	private String userID;
 	private String password;
@@ -14,5 +14,8 @@ public class User {
 	public boolean authenticate(String userId,String password){
 
 		return userId.equals(this.userID)&&password.equals(this.password);
+	}
+	public String toString(){
+		return userID;
 	}
 }
