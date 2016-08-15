@@ -17,7 +17,7 @@ public class CheckOutMovies implements MenuItem {
 	}
 
 	public OperationStatus execute(Library library, int ID) throws ItemNotFound {
-		if ((library.checkout(ID).getClass()) == Movie.class)
+		if ((library.checkout(ID,new User("0000","Hello")).getClass()) == Movie.class)
 			return OperationStatus.SUCCESSFUL_CHECKOUT;
 		return OperationStatus.UNSUCCESSFUL_CHECKOUT;
 

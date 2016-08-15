@@ -32,11 +32,11 @@ public class Menu {
 		return OperationStatus.INVALID_OPERATION;
 	}
 
-	public OperationStatus postLoginMenu(Library library) throws ItemNotFound {
+	public OperationStatus postLoginMenu(Library library,User user) throws ItemNotFound {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1, new Items(Library.Type.BOOK));
 		menuItems.put(2, new Items(Library.Type.MOVIE));
-		menuItems.put(3, new CheckOutBooks(consoleReader));
+		menuItems.put(3, new CheckOutBooks(consoleReader,user));
 		menuItems.put(4, new CheckOutMovies(consoleReader));
 		menuItems.put(5, new ReturnBook(consoleReader));
 		menuItems.put(6, new userLogout(consoleReader,this));

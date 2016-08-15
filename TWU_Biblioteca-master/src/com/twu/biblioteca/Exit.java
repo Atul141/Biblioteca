@@ -8,6 +8,7 @@ public class Exit implements MenuItem {
 	public OperationStatus execute(Library library) {
 		OperationStatus operationStatus=OperationStatus.QUIT;
 		new Writer().printMessage(operationStatus.getMessage());
+		System.exit(0);
 		return operationStatus;
 	}
 

@@ -16,18 +16,18 @@ public class BibliotecaApp {
 		writer.printMessage(menu.getMenu());
 		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
 		operationStatus = preLoginOperations(writer, library, menu);
-		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
-			postLoginOperations(writer, library, menu);
+//		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
+	//		postLoginOperations(writer, library, menu);
 
-		}
+		//}
 	}
-	public static void postLoginOperations(Writer writer, Library library, Menu menu) throws ItemNotFound {
+	public static void postLoginOperations(Writer writer, Library library, Menu menu,User user) throws ItemNotFound {
 		writer.printMessage(menu.getPostLoginMenu());
-		OperationStatus operationStatus=menu.postLoginMenu(library);
+		OperationStatus operationStatus=menu.postLoginMenu(library,user);
 		while (operationStatus != OperationStatus.QUIT) {
 			try {
 				writer.printMessage(menu.getPostLoginMenu());
-				operationStatus = menu.postLoginMenu(library);
+				operationStatus = menu.postLoginMenu(library,user);
 			} catch (ItemNotFound e) {
 				writer.printMessage("Item not Found");
 			}

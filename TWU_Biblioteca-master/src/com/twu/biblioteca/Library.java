@@ -13,7 +13,7 @@ public class Library {
 	}
 	Map<Integer,Item> availableItems;
 	Map<Integer,Item> checkedOutItems=new HashMap<Integer, Item>();
-
+	Map<Book,User> checkedOutbooks=new HashMap<Book, User>();
 
 	public Library(Map<Integer,Item> availableItems) {
 		this.availableItems = availableItems;
@@ -50,15 +50,19 @@ public class Library {
 		}
 
 
-	public Item checkout(int id) throws ItemNotFound {
+	public Item checkout(int id,User user) throws ItemNotFound {
 		if (availableItems.containsKey(id)) {
 			Item item = availableItems.remove(id);
-			checkedOutItems.put(id,item);
+			checkedOutItems.put(id, item);
+			try {
+				checkedOutbooks.put((Book) item, user);
+			} catch (ClassCastException e) {
+
+			}
 			return item;
 		}
-		throw new ItemNotFound();
+			throw new ItemNotFound();
 	}
-
 	public Item returnBook(int id) throws ItemNotFound {
 		if (checkedOutItems.containsKey(id)) {
 			Item item = checkedOutItems.remove(id);
