@@ -13,13 +13,7 @@ public class BibliotecaApp {
 		Writer writer = new Writer();
 		Library library = new Library(reader.fetchFromFile());
 		Menu menu = new Menu(reader, library);
-		writer.printMessage(menu.getMenu());
-		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
-		operationStatus = preLoginOperations(writer, library, menu);
-//		if (operationStatus == OperationStatus.SUCCESSFUL_LOGIN) {
-	//		postLoginOperations(writer, library, menu);
-
-		//}
+		preLoginOperations(writer,library,menu);
 	}
 	public static void postLoginOperations(Writer writer, Library library, Menu menu,User user) throws ItemNotFound {
 		writer.printMessage(menu.getPostLoginMenu());

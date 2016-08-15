@@ -36,11 +36,12 @@ public class Menu {
 		HashMap<Integer, MenuItem> menuItems = new HashMap<Integer, MenuItem>();
 		menuItems.put(1, new Items(Library.Type.BOOK));
 		menuItems.put(2, new Items(Library.Type.MOVIE));
-		menuItems.put(3, new CheckOutBooks(consoleReader,user));
-		menuItems.put(4, new CheckOutMovies(consoleReader));
-		menuItems.put(5, new ReturnBook(consoleReader));
-		menuItems.put(6, new userLogout(consoleReader,this));
-		menuItems.put(7, new Exit());
+		menuItems.put(3, new DisplayCustomerInfo(user));
+		menuItems.put(4, new CheckOutBooks(consoleReader,user));
+		menuItems.put(5, new CheckOutMovies(consoleReader));
+		menuItems.put(6, new ReturnBook(consoleReader));
+		menuItems.put(7, new userLogout(consoleReader,this));
+		menuItems.put(8, new Exit());
 		int userChoice = getUserChoiceForPostLoginMenu();
 		if (menuItems.containsKey(userChoice)) {
 			MenuItem listableMenu = menuItems.get(userChoice);
@@ -71,7 +72,7 @@ public class Menu {
 	}
 
 	public String getPostLoginMenu() {
-		return "1.List OF Books\n2.List Of Movie\n3.Checkout Book\n4.Checkout Movie\n5.Return Item\n6.Logout\n7.Exit";
+		return "1.List OF Books\n2.List Of Movie\n3.Personal Info\n4.Checkout Book\n5.Checkout Movie\n6.Return Item\n7.Logout\n8.Exit";
 	}
 
 	public String getAdminMenu() {
