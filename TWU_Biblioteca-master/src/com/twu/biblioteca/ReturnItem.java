@@ -6,10 +6,10 @@ import IO.Writer;
 import static com.twu.biblioteca.OperationStatus.*;
 
 //
-public class ReturnBook implements MenuItem {
+public class ReturnItem implements MenuItem {
 	private ConsoleReader consoleReader;
 
-	public ReturnBook(ConsoleReader consoleReader) {
+	public ReturnItem(ConsoleReader consoleReader) {
 		this.consoleReader = consoleReader;
 	}
 
@@ -22,8 +22,12 @@ public class ReturnBook implements MenuItem {
 	}
 
 	public OperationStatus execute(Library library, int bookID) throws ItemNotFound {
-		if (library.returnBook(bookID).getClass()==Book.class)
-			return SUCCESSFUL_RETURN;
+		boolean success=false;
+		try {success=library.returnBook(bookID).getClass() == Book.class;
+		}catch (ItemNotFound e){
+		}
+		if(success)
+		return SUCCESSFUL_RETURN;
 		return UNSUCCESSFUL_RETURN;
 	}
 

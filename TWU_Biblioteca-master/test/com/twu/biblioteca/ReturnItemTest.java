@@ -1,6 +1,5 @@
 package com.twu.biblioteca;
 
-import IO.Reader;
 import IO.ConsoleReader;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //
-public class ReturnBookTest {
+public class ReturnItemTest {
 
 	class DummyConsoleReader implements ConsoleReader {
 
@@ -33,7 +32,7 @@ public class ReturnBookTest {
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
 		Library library=new Library(listOfBook);
 		new CheckOutBooks(dummyReader,new User("0000","Hello")).execute(library,1);
-		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
+		Assert.assertEquals(new ReturnItem(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
 @Test(expected =ItemNotFound.class)
 	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, ItemNotFound {
@@ -43,7 +42,7 @@ public class ReturnBookTest {
 		DummyConsoleReader dummyReader=new DummyConsoleReader();
 		Library library=new Library(listOfBook);
 		new CheckOutBooks(dummyReader,new User("0000","Hello")).execute(library,1);
-		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
+		Assert.assertEquals(new ReturnItem(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 
 }

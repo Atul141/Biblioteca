@@ -27,7 +27,7 @@ public void  setup(){
 	public void shouldBeAbleToVerifyIfItemDetailsArePrintedForBooks() throws IOException {
 		List<String> listOFBooks = getBooks();
 	Reader reader =new Reader();
-	assertEquals(listOFBooks, new Library(reader.fetchFromFile()).printBookList(Library.Type.BOOK));
+	assertEquals(listOFBooks, new Library(reader.fetchFromFile()).printItems(Library.Type.BOOK));
 }
 
 	private List<String> getBooks() {
@@ -55,7 +55,7 @@ public void  setup(){
 	listOFBooks.add(movie2.getDetails());
 	listOFBooks.add(movie3.getDetails());
 
-		//assertEquals(listOFBooks, new Library().printBookList(Library.Type.MOVIE));
+		//assertEquals(listOFBooks, new Library().printItems(Library.Type.MOVIE));
 }
 
 }

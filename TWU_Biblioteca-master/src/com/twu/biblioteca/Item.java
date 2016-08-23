@@ -4,4 +4,6 @@ package com.twu.biblioteca;
 public interface Item {
 
 	String getDetails();
+
+	String[] getDetailsForDB();
 }

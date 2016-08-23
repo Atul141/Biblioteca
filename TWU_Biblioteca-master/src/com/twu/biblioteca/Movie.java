@@ -21,4 +21,10 @@ public class Movie implements Item{
 	public String getDetails() {
 		return String.format("%-5d%-25s%-25s%-7d%-1d\n",id, name,director,year,rating);
 	}
+
+	@Override
+	public String[] getDetailsForDB() {
+		String movieDetails=id+" "+name+" "+director+" "+year+" "+rating;
+		return movieDetails.split(" ");
+	}
 }

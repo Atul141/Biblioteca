@@ -6,8 +6,9 @@ import IO.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
-//
-public class UserLogin implements MenuItem {
+// Deals with UserLogin Process
+
+	public class UserLogin implements MenuItem {
 
 	private Writer writer = new Writer();
 	private Reader reader = new Reader();
@@ -37,28 +38,33 @@ public class UserLogin implements MenuItem {
 		for (Accounts user : accounts.keySet()) {
 			if (user.authenticate(userId, password)) {
 				isPresent = true;
-				if (accounts.get(user) == 'a')
-					invokeAdminMenu((User) user);
-				else
-					invokeUserMenu((User) user);
+				determineIfAdminOrUser(user);
 			}
 		}
-		if (!(isPresent))
-			wrongPassword();
+			wrongPassword(isPresent);
 		return isPresent;
 	}
 
-	private void wrongPassword() {
-		writer.printMessage("Wrong password");
-		System.exit(0);
+	private void determineIfAdminOrUser(Accounts user) throws ItemNotFound {
+		if (accounts.get(user) == 'a')
+			invokeAdminMenu();
+		else
+			invokeUserMenu((User) user);
 	}
 
-	private void invokeAdminMenu(User user) throws ItemNotFound {
-		BibliotecaApp.adminLoginOperations(writer, library, menu, user);
+	private void wrongPassword(boolean isPresent) throws ItemNotFound {
+		if (!(isPresent)) {
+			writer.printMessage("Wrong Details");
+			execute(library);
+		}
+	}
+	private void invokeAdminMenu() throws ItemNotFound {
+		menu.adminMenu();
 	}
 
 	private void invokeUserMenu(User user) throws ItemNotFound {
-		BibliotecaApp.postLoginOperations(writer, library, menu, user);
+		writer.printMessage("i am here");
+		menu.postLoginMenu(user);
 	}
 
 	@Override
@@ -69,7 +75,6 @@ public class UserLogin implements MenuItem {
 		writer.printMessage("Enter your Password");
 		String password = reader.receiveString();
 		authenticatePassword(userId, password);
-		System.exit(0);
 		return OperationStatus.SUCCESSFUL_LOGIN;
 	}
 }

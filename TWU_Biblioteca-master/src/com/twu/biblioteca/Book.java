@@ -21,6 +21,12 @@ public class Book implements Item{
 	}
 
 	@Override
+	public String[] getDetailsForDB() {
+		String bookDetails=ISBN+" "+name+" "+author+" "+yearOfPublish;
+		return bookDetails.split(" ");
+	}
+
+	@Override
 	public String toString() {
 		return name;
 	}

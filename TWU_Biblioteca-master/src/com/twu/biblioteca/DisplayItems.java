@@ -5,11 +5,11 @@ import IO.Writer;
 import java.util.List;
 
 // Prints The List OF Books
-public class Items implements MenuItem {
+public class DisplayItems implements MenuItem {
 
 	private Library.Type type;
 
-	Items(Library.Type type) {
+	DisplayItems(Library.Type type) {
 
 		this.type = type;
 	}
@@ -17,20 +17,20 @@ public class Items implements MenuItem {
 	@Override
 	public OperationStatus execute(Library library) {
 		Writer writer = new Writer();
-		List<String> listOfBooks = library.printBookList(type);
+		List<String> items = library.printItems(type);
 		if (type == Library.Type.BOOK) {
-
 			writer.printMessage("ISBN NAME           AUTHOR         YEAR ");
-			for (String book : listOfBooks) {
-				writer.printMessage(book);
-			}
-			return OperationStatus.SUCCESSFULLY_RETURNED;
+			displayItems(writer, items);
 		} else {
 			writer.printMessage("ID   NAME                     DIRECTOR                 YEAR RATING");
-			for (String movie : listOfBooks) {
-				writer.printMessage(movie);
-			}
+			displayItems(writer, items);
 		}
-		return OperationStatus.SUCCESSFULLY_RETURNED;
+		return OperationStatus.SUCCESSFUL_DISPLAY;
+	}
+
+	private void displayItems(Writer writer, List<String> items) {
+		for (String item : items) {
+			writer.printMessage(item);
+		}
 	}
 }
