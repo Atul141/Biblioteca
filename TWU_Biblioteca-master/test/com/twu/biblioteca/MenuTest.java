@@ -32,7 +32,7 @@ public class MenuTest {
 		Menu menu=new Menu(new Reader(),new Library(new Reader().fetchFromFile()));
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertEquals(menu.preLoginMenu(new Library(listOfBook),5), OperationStatus.INVALID_OPERATION);
+		Assert.assertEquals(menu.preLoginMenu(new Library(listOfBook),9), OperationStatus.INVALID_OPERATION);
 	}
 
 	@Test
@@ -40,7 +40,7 @@ public class MenuTest {
 		Menu menu=new Menu(new Reader(),new Library(new Reader().fetchFromFile()));
 		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertNotEquals(menu.preLoginMenu(new Library(listOfBook),4), OperationStatus.INVALID_OPERATION);
+		Assert.assertNotEquals(menu.preLoginMenu(new Library(listOfBook),1), OperationStatus.INVALID_OPERATION);
 	}
 
 
