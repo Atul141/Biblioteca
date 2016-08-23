@@ -1,28 +1,29 @@
 package com.twu.biblioteca;
 
-import IO.Input;
+import IO.Reader;
 import IO.Writer;
 
 import java.io.IOException;
 
 public class BibliotecaApp {
 
-	public static void main(String[] args) throws IOException, BookNotFoundExemption {
+	public static void main(String[] args) throws IOException, ItemNotFound {
 		printWelcomeMessage();
-		Input input = new Input();
+		Reader reader = new Reader();
 		Writer writer = new Writer();
-		Menu menu = new Menu(input);
-		Library library = new Library(menu, input.fetchFromFile());
+		Library library = new Library(reader.fetchFromFile());
+		Menu menu = new Menu(reader,library);
+
 		writer.printMessage(menu.getMenu());
-		OperationStatus operationStatus = menu.performOperation(library, getUserChoice());
+		OperationStatus operationStatus = menu.preLoginMenu(library, getUserChoice());
 		while (operationStatus != OperationStatus.QUIT) {
 			writer.printMessage(menu.getMenu());
-			operationStatus = menu.performOperation(library, getUserChoice());
+			operationStatus = menu.preLoginMenu(library, getUserChoice());
 		}
 	}
 
 	public static int getUserChoice() {
-		int temp = new Input().receiveInput();
+		int temp = new Reader().receiveInput();
 		System.out.println();
 		return temp;
 	}

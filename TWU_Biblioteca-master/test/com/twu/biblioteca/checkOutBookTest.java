@@ -1,43 +1,28 @@
 package com.twu.biblioteca;
 
-import IO.Input;
 import IO.Reader;
-import org.junit.Assert;
+import IO.ConsoleReader;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+
 //
 public class checkOutBookTest {
 
-
-	class DummyReader implements Reader {
-
-		@Override
-		public int receiveInput() {
-			return 2;
-
-		}
-
-		@Override
-		public Map<Integer, Book> fetchFromFile() throws IOException {
-			return null;
-		}
-	}
 	@Test
-	public void shouldBeAbleToCheckoutAvailableBooks() throws IOException, BookNotFoundExemption {
-	Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+	public void shouldBeAbleToCheckoutAvailableBooks() throws IOException, ItemNotFound {
+	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
-	DummyReader dummyReader=new DummyReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new Library(new Menu(new Input()), listOfBook), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
+	assertEquals(new CheckOutBooks(new Reader()).execute(new Library( listOfBook), 1), OperationStatus.SUCCESSFUL_CHECKOUT);
 }
-@Test
-	public void shouldNotBeAbleToCheckoutUnAvailableBooks() throws IOException, BookNotFoundExemption {
-	Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+@Test(expected = ItemNotFound.class)
+	public void shouldNotBeAbleToCheckoutUnAvailableBooks() throws IOException, ItemNotFound {
+	Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 	listOfBook.put(1,new Book(1,"Java","Malik",2005));
-	DummyReader dummyReader=new DummyReader();
-	Assert.assertEquals(new CheckOutBook(dummyReader).execute(new Library(new Menu(new Input()), listOfBook), 2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
+	assertEquals(new CheckOutBooks(new Reader()).execute(new Library( listOfBook),2), OperationStatus.UNSUCCESSFUL_CHECKOUT);
 }
 }

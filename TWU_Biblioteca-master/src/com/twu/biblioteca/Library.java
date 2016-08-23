@@ -1,46 +1,72 @@
 package com.twu.biblioteca;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-// Represents the collections of book
+//
 public class Library {
 
-	Map<Integer, Book> availableBooks = new HashMap<Integer, Book>();
-	Map<Integer, Book> checkoutBooks = new HashMap<Integer, Book>();
-	private Menu menu;
+	public enum Type {
+		BOOK, MOVIE;
+	}
+	Map<Integer,Item> availableItems;
+	Map<Integer,Item> checkedOutItems=new HashMap<Integer, Item>();
 
-	public Library(Menu menu, Map<Integer, Book> availableBooks) {
-		this.menu = menu;
-		this.availableBooks = availableBooks;
+
+	public Library(Map<Integer,Item> availableItems) {
+		this.availableItems = availableItems;
+		addMovies();
 	}
 
-	public List<String> printBookList() {
+	private void addMovies() {
 
-		List<String> bookDetails = new ArrayList<String>();
-		for (Book book : availableBooks.values()) {
-			bookDetails.add(book.getDetails());
+		Movie movie1=new Movie(1,"2012","Roland",2011,6);
+		Movie movie2=new Movie(2,"White House Down","Roland",2008,7);
+		Movie movie3=new Movie(3,"Black Hawk Down","Rediley",2005,8);
+
+		availableItems.put(11,movie1);
+		availableItems.put(12,movie2);
+		availableItems.put(13,movie3);
+	}
+
+	public List<String> printBookList(Type type) {
+
+		List<String> itemDetails = new ArrayList<String>();
+			for (Item item : availableItems.values()) {
+				if (type == Type.BOOK) {
+					if (item.getClass() == Book.class)
+						itemDetails.add(item.getDetails());
+
+				}
+				if (type == Type.MOVIE) {
+					if (item.getClass() == Movie.class)
+						itemDetails.add(item.getDetails());
+
+				}
+			}
+			return itemDetails;
 		}
-		return bookDetails;
-	}
 
-	public Book checkout(int ISBN) throws BookNotFoundExemption {
-		if (availableBooks.containsKey(ISBN)) {
-			Book book = availableBooks.remove(ISBN);
-			checkoutBooks.put(ISBN, book);
-			return book;
+
+	public Item checkout(int id) throws ItemNotFound {
+		if (availableItems.containsKey(id)) {
+			Item item = availableItems.remove(id);
+			checkedOutItems.put(id,item);
+			return item;
 		}
-		throw new BookNotFoundExemption();
+		throw new ItemNotFound();
 	}
 
-	public Book returnBook(int ISBN) throws BookNotFoundExemption {
-		if (checkoutBooks.containsKey(ISBN)) {
-			Book book = checkoutBooks.remove(ISBN);
-			availableBooks.put(ISBN, book);
+	public Item returnBook(int id) throws ItemNotFound {
+		if (checkedOutItems.containsKey(id)) {
+			Item item = checkedOutItems.remove(id);
+			availableItems.put(id,item);
 
-			return book;
+			return item;
 		}
-		throw new BookNotFoundExemption();
+		throw new ItemNotFound();
 	}
-
 
 }

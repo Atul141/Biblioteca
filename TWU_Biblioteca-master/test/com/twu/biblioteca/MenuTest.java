@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import IO.Input;
 import IO.Reader;
+import IO.ConsoleReader;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,9 +12,10 @@ import java.util.Map;
 import static org.mockito.Mockito.mock;
 
 //
+
 public class MenuTest {
 
-	class DummyReader implements Reader{
+	class DummyConsoleReader implements ConsoleReader {
 
 		@Override
 		public int receiveInput() {
@@ -22,24 +23,24 @@ public class MenuTest {
 		}
 
 		@Override
-		public Map<Integer, Book> fetchFromFile() throws IOException {
+		public Map<Integer, Item> fetchFromFile() throws IOException {
 			return null;
 		}
 	}
 	@Test
-	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException, BookNotFoundExemption {
-		Menu menu=new Menu(new Input());
-		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+	public void shouldAbleToPromptInvalidOptionMessageIfInvalidInputIsGiven() throws IOException, ItemNotFound {
+		Menu menu=new Menu(new Reader(),new Library(new Reader().fetchFromFile()));
+		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertEquals(menu.performOperation(new Library(new Menu(new Input()),listOfBook),5), OperationStatus.INVALID_OPERATION);
+		Assert.assertEquals(menu.preLoginMenu(new Library(listOfBook),5), OperationStatus.INVALID_OPERATION);
 	}
 
 	@Test
-	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException, BookNotFoundExemption {
-		Menu menu=new Menu(new Input());
-		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+	public void shouldNotAbleToPromptInvalidOptionMessageIfValidInputIsGiven() throws IOException, ItemNotFound {
+		Menu menu=new Menu(new Reader(),new Library(new Reader().fetchFromFile()));
+		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		Assert.assertNotEquals(menu.performOperation(new Library(new Menu(new Input()),listOfBook),4), OperationStatus.INVALID_OPERATION);
+		Assert.assertNotEquals(menu.preLoginMenu(new Library(listOfBook),4), OperationStatus.INVALID_OPERATION);
 	}
 
 

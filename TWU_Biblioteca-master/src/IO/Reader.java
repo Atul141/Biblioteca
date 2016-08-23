@@ -1,14 +1,15 @@
 package IO;
 
 import com.twu.biblioteca.Book;
+import com.twu.biblioteca.Item;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-// Takes Input
-public class Input implements ConsoleReader {
+// Takes Reader
+public class Reader implements ConsoleReader {
 
 	public int receiveInput() {
 		int option = 0;
@@ -20,20 +21,19 @@ public class Input implements ConsoleReader {
 		return option;
 	}
 
-	public Map<Integer,Book> fetchFromFile(int choice) throws IOException {
+	public Map<Integer,Item> fetchFromFile() throws IOException {
 		String book;
-		List<String> listOfBooks = new ArrayList<String>();
-		FileReader reader;
-		if(choice==1){
-		reader = new FileReader("/Users/atulk/Desktop/Assignment/booklist.txt");}
-		else {
-			reader = new FileReader("/Users/atulk/Desktop/Assignment/movielist.txt");}
-
-
+		List<String> listOfItems = new ArrayList<String>();
+		FileReader reader = new FileReader("/Users/atulk/Desktop/Assignment/booklist.txt");
 		BufferedReader buffer = new BufferedReader(reader);
 		while ((book = buffer.readLine()) != null) {
-			listOfBooks.add(book);
+			listOfItems.add(book);
 		}
-			return (new parseInput().createMapOfBooks(listOfBooks));
+		return (new parseInput().createMapOfBooks(listOfItems));
+	}
+
+	public String receiveString() {
+	Scanner input=new Scanner(System.in);
+		return input.next();
 	}
 }

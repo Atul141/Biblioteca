@@ -1,7 +1,7 @@
 package com.twu.biblioteca;
 
-import IO.Input;
 import IO.Reader;
+import IO.ConsoleReader;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import java.util.Map;
 //
 public class ReturnBookTest {
 
-	class DummyReader implements Reader{
+	class DummyConsoleReader implements ConsoleReader {
 
 		@Override
 		public int receiveInput() {
@@ -20,29 +20,29 @@ public class ReturnBookTest {
 		}
 
 		@Override
-		public Map<Integer, Book> fetchFromFile() throws IOException {
+		public Map<Integer, Item> fetchFromFile() throws IOException {
 			return null;
 		}
 	}
 
 	@Test
-	public void shouldBeAbleToReturnCheckedBook() throws IOException, BookNotFoundExemption {
+	public void shouldBeAbleToReturnCheckedBook() throws IOException, ItemNotFound {
 
-		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		DummyReader dummyReader=new DummyReader();
-		Library library=new Library(new Menu(new Input()),listOfBook);
-		new CheckOutBook(dummyReader).execute(library,1);
+		DummyConsoleReader dummyReader=new DummyConsoleReader();
+		Library library=new Library(listOfBook);
+		new CheckOutBooks(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,1), OperationStatus.SUCCESSFUL_RETURN);
 	}
-@Test
-	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, BookNotFoundExemption {
+@Test(expected =ItemNotFound.class)
+	public void shouldNotBeAbleToReturnUnCheckedBook() throws IOException, ItemNotFound {
 
-		Map<Integer,Book> listOfBook=new HashMap<Integer,Book>();
+		Map<Integer,Item> listOfBook=new HashMap<Integer,Item>();
 		listOfBook.put(1,new Book(1,"Java","Malik",2005));
-		DummyReader dummyReader=new DummyReader();
-		Library library=new Library(new Menu(new Input()),listOfBook);
-		new CheckOutBook(dummyReader).execute(library,1);
+		DummyConsoleReader dummyReader=new DummyConsoleReader();
+		Library library=new Library(listOfBook);
+		new CheckOutBooks(dummyReader).execute(library,1);
 		Assert.assertEquals(new ReturnBook(dummyReader).execute(library,2), OperationStatus.UNSUCCESSFUL_RETURN);
 	}
 
