@@ -1,4 +1,6 @@
-package com.twu.biblioteca;
+package IO;
+
+import com.twu.biblioteca.Book;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,11 +8,9 @@ import java.io.IOException;
 import java.util.*;
 
 // Takes Input
-public class Input {
+public class Input implements ConsoleReader {
 
-
-
-	int receiveInput() {
+	public int receiveInput() {
 		int option = 0;
 		Scanner input = new Scanner(System.in);
 		try {
@@ -20,10 +20,16 @@ public class Input {
 		return option;
 	}
 
-	public Map<Integer,Book> fetchFromFile() throws IOException {
+	public Map<Integer,Book> fetchFromFile(int choice) throws IOException {
 		String book;
 		List<String> listOfBooks = new ArrayList<String>();
-		FileReader reader = new FileReader("/Users/atulk/Desktop/Assignment/booklist.txt");
+		FileReader reader;
+		if(choice==1){
+		reader = new FileReader("/Users/atulk/Desktop/Assignment/booklist.txt");}
+		else {
+			reader = new FileReader("/Users/atulk/Desktop/Assignment/movielist.txt");}
+
+
 		BufferedReader buffer = new BufferedReader(reader);
 		while ((book = buffer.readLine()) != null) {
 			listOfBooks.add(book);

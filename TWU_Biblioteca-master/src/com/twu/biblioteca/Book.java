@@ -1,10 +1,10 @@
 package com.twu.biblioteca;
 
 // Represents a Book
-public class Book {
+public class Book implements Item{
 
 	private final int ISBN;
-	public final String name;
+	private final String name;
 	private final String author;
 	private final int yearOfPublish;
 
@@ -15,7 +15,8 @@ public class Book {
 		this.yearOfPublish = yearOfPublish;
 	}
 
-	public String getBookDetails() {
+	public String getDetails() {
+
 		return String.format("%-5d%-15s%-15s%-5d\n", ISBN, name, author, yearOfPublish);
 	}
 

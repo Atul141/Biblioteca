@@ -7,16 +7,10 @@ public class Library {
 
 	Map<Integer, Book> availableBooks = new HashMap<Integer, Book>();
 	Map<Integer, Book> checkoutBooks = new HashMap<Integer, Book>();
+	private Menu menu;
 
-	public Library() {
-
-	}
-
-	public String getWelcomeMessage() {
-		return "Welcome";
-	}
-
-	public Library(Map<Integer, Book> availableBooks) {
+	public Library(Menu menu, Map<Integer, Book> availableBooks) {
+		this.menu = menu;
 		this.availableBooks = availableBooks;
 	}
 
@@ -24,28 +18,28 @@ public class Library {
 
 		List<String> bookDetails = new ArrayList<String>();
 		for (Book book : availableBooks.values()) {
-			bookDetails.add(book.getBookDetails());
+			bookDetails.add(book.getDetails());
 		}
 		return bookDetails;
 	}
 
-	public boolean checkout(int ISBN) {
+	public Book checkout(int ISBN) throws BookNotFoundExemption {
 		if (availableBooks.containsKey(ISBN)) {
 			Book book = availableBooks.remove(ISBN);
 			checkoutBooks.put(ISBN, book);
-			return true;
+			return book;
 		}
-		return false;
+		throw new BookNotFoundExemption();
 	}
 
-	public boolean returnBook(int ISBN) {
+	public Book returnBook(int ISBN) throws BookNotFoundExemption {
 		if (checkoutBooks.containsKey(ISBN)) {
 			Book book = checkoutBooks.remove(ISBN);
 			availableBooks.put(ISBN, book);
 
-			return true;
+			return book;
 		}
-		return false;
+		throw new BookNotFoundExemption();
 	}
 
 
