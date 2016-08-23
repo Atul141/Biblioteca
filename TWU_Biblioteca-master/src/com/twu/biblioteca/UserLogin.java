@@ -7,7 +7,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 // Deals with UserLogin Process
-public class UserLogin implements MenuItem {
+
+	public class UserLogin implements MenuItem {
 
 	private Writer writer = new Writer();
 	private Reader reader = new Reader();
@@ -46,23 +47,24 @@ public class UserLogin implements MenuItem {
 
 	private void determineIfAdminOrUser(Accounts user) throws ItemNotFound {
 		if (accounts.get(user) == 'a')
-			invokeAdminMenu((Admin) user);
+			invokeAdminMenu();
 		else
 			invokeUserMenu((User) user);
 	}
 
 	private void wrongPassword(boolean isPresent) throws ItemNotFound {
 		if (!(isPresent)) {
-			writer.printMessage("Wrong password");
+			writer.printMessage("Wrong Details");
 			execute(library);
 		}
 	}
-	private void invokeAdminMenu(Admin user) throws ItemNotFound {
-		BibliotecaApp.adminLoginOperations(writer, library, menu, user);
+	private void invokeAdminMenu() throws ItemNotFound {
+		menu.adminMenu();
 	}
 
 	private void invokeUserMenu(User user) throws ItemNotFound {
-		BibliotecaApp.postLoginOperations(writer, library, menu, user);
+		writer.printMessage("i am here");
+		menu.postLoginMenu(user);
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class DisplayItems implements MenuItem {
 			writer.printMessage("ID   NAME                     DIRECTOR                 YEAR RATING");
 			displayItems(writer, items);
 		}
-		return OperationStatus.SUCCESSFULLY_RETURNED;
+		return OperationStatus.SUCCESSFUL_DISPLAY;
 	}
 
 	private void displayItems(Writer writer, List<String> items) {

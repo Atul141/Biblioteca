@@ -21,10 +21,11 @@ public class Reader implements ConsoleReader {
 		return option;
 	}
 
+
 	public Map<Integer,Item> fetchFromFile() throws IOException {
 		String book;
 		List<String> listOfItems = new ArrayList<String>();
-		FileReader reader = new FileReader("/Users/atulk/Desktop/Assignment/booklistdlahdliwhdl.txt");
+		FileReader reader = new FileReader("/Users/atulk/Desktop/Assignment/booklistdlahdliw.txt");
 		BufferedReader buffer = new BufferedReader(reader);
 		while ((book = buffer.readLine()) != null) {
 			listOfItems.add(book);
@@ -36,4 +37,5 @@ public class Reader implements ConsoleReader {
 	Scanner input=new Scanner(System.in);
 		return input.next();
 	}
+
 }

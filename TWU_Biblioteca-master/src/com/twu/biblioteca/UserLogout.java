@@ -4,18 +4,16 @@ import IO.ConsoleReader;
 import IO.Writer;
 
 // Logs out User
-public class userLogout implements MenuItem {
-	private ConsoleReader consoleReader;
+public class UserLogout implements MenuItem {
 	private Menu menu;
 
-	public userLogout(ConsoleReader consoleReader,Menu menu) {
-		this.consoleReader = consoleReader;
+	public UserLogout(Menu menu) {
 		this.menu = menu;
 	}
 
 	@Override
 	public OperationStatus execute(Library library) throws ItemNotFound {
-		BibliotecaApp.preLoginOperations(new Writer(),library,menu);
+		menu.preLoginMenu();
 		return OperationStatus.SUCCESSFUL_LOGOUT;
 	}
 }
